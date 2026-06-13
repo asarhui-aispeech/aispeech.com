@@ -57,6 +57,19 @@
         .specs p { font-size: 13px; color: var(--muted); }
         .specs strong { color: var(--text); }
 
+        /* Header */
+        header { position: sticky; top: 0; z-index: 100; background: rgba(10,10,12,0.92); backdrop-filter: blur(12px); border-bottom: .5px solid var(--border); padding: 14px 0; }
+        header .container { display: flex; align-items: center; justify-content: space-between; }
+        header .logo { font-size: 16px; font-weight: 700; color: var(--lime); letter-spacing: -0.5px; text-decoration: none; }
+        header nav { display: flex; align-items: center; gap: 20px; }
+        header nav a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color .2s; }
+        header nav a:hover { color: var(--lime); }
+        .lang-toggle { display: flex; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
+        .lang-toggle button { font-size: 11px; padding: 5px 12px; border: none; cursor: pointer; font-weight: 600; background: var(--card); color: var(--muted); transition: all .2s; }
+        .lang-toggle button.active { background: var(--lime); color: var(--bg); }
+        .btn-header { font-size: 12px; padding: 8px 20px; border-radius: 8px; background: var(--lime); color: var(--bg); font-weight: 600; text-decoration: none; transition: all .2s; }
+        .btn-header:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
         /* Footer */
         footer { border-top: .5px solid var(--border); padding: 20px 0; text-align: center; font-size: 11px; color: var(--muted); }
         footer span { color: var(--lime); font-weight: 600; }
@@ -69,6 +82,21 @@
     </style>
 </head>
 <body>
+
+    <header>
+        <div class="container">
+            <a href="./" class="logo">AISpeech</a>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="#tools">Tools</a>
+                <a href="#how">How It Works</a>
+                <div class="lang-toggle" id="langToggle">
+                    <button class="active" onclick="switchLang('en')">EN</button>
+                    <button onclick="switchLang('mn')">MN</button>
+                </div>
+            </nav>
+        </div>
+    </header>
 
     <!-- Hero -->
     <div class="hero">
@@ -88,7 +116,7 @@
     <div class="container">
 
         <!-- Features -->
-        <div class="section">
+        <div class="section" id="features">
             <h2>Why AISpeech</h2>
             <p style="text-align:center; font-size:13px; color:var(--muted); max-width:600px; margin:0 auto 28px;">AISpeech's local-first architecture eliminates the most critical risks users face with cloud-based alternatives.</p>
             <div class="features">
@@ -121,7 +149,7 @@
         </div>
 
         <!-- Tools -->
-        <div class="tools-section">
+        <div class="tools-section" id="tools">
             <h2>All-In-One Converter</h2>
             <div class="cat-label">PDF Tools — 9</div>
             <div class="tools-grid">
@@ -188,5 +216,88 @@
         </div>
     </footer>
 
+<script>
+const T = {
+  en: {
+    subtitle: 'Zero Cloud. Zero Risk. Zero Subscriptions.',
+    desc: 'Smart Windows desktop app — speech-to-text directly to your cursor, plus 19 offline PDF & image converter tools. Nothing leaves your computer.',
+    privacy: '🔒 Your files and voice never leave your computer',
+    buy: 'Buy Now',
+    howLink: 'How It Works',
+    priceNote: '🔥 Launch offer: first 100 customers get 50% off! One-time payment. No subscription. Lifetime license.',
+    whyTitle: 'Why AISpeech',
+    whyDesc: "AISpeech's local-first architecture eliminates the most critical risks users face with cloud-based alternatives.",
+    f1t: 'Data Privacy & Security', f1d: 'Government agencies, banks, law firms, and hospitals are prohibited from sending internal data to external servers. AISpeech processes everything locally — your voice and files never leave your machine. All data is processed in memory and discarded. Zero leak risk.',
+    f2t: 'Works Without Internet', f2d: 'Cloud-based apps freeze when your connection drops or slows down. AISpeech runs entirely on your local machine — even license validation reads from a local file. 100% uptime regardless of network conditions, anywhere in the world.',
+    f3t: 'Ultra-Low Latency', f3d: 'No network round-trip. No waiting for a server response. AISpeech polls input 20 times per second (~50ms) and pastes text at your cursor instantly via Ctrl+V. It feels like you\'re typing at full speed — true real-time dictation.',
+    f4t: 'One-Time Purchase, Lifetime License', f4d: 'Cloud apps charge monthly because they pay for servers. AISpeech uses your own CPU and RAM — no server costs. That means one purchase, lifetime ownership. No recurring fees, no surprise charges, no price hikes.',
+    f5t: 'Deep OS Integration', f5d: 'Web-based apps can\'t access system hotkeys or clipboard. AISpeech uses native Windows PowerShell and C# to integrate deeply with your OS — press F6 in any app (ERP, accounting, games, chat) and dictate. The lime equaliser floats on top, invisible until you need it.',
+    toolsTitle: 'All-In-One Converter',
+    howTitle: 'How It Works',
+    s1t: 'Install', s1d: 'Download, run the installer. No admin required. Takes 30 seconds.',
+    s2t: 'Open any app', s2d: 'Word, Notepad, Chrome, Slack — place your cursor where you want text.',
+    s3t: 'Press F6 & speak', s3d: 'The equaliser lights up. Your words appear at the cursor in real-time.',
+    s4t: 'Convert files', s4d: 'Use the built-in converter for PDF and image tasks. Drag, drop, done.',
+    specsTitle: 'System Requirements',
+    specsText: '<strong>Windows 10/11</strong> (64-bit) · <strong>Google Chrome</strong> installed · Active microphone',
+    features: 'Features', tools: 'Tools',
+  },
+  mn: {
+    subtitle: 'Cloud-гүй. Эрсдэлгүй. Захиалгагүй.',
+    desc: 'Windows desktop апп — ярианаас текст шууд курсор дээр, мөн 19 офлайн PDF & зураг хөрвүүлэгч хэрэгсэл. Ямар ч мэдээлэл компьютерээс гарахгүй.',
+    privacy: '🔒 Таны файл, дуу хоолой компьютерээс хэзээ ч гарахгүй',
+    buy: 'Худалдаж авах',
+    howLink: 'Хэрхэн ажилладаг',
+    priceNote: '🔥 Нээлтийн хөнгөлөлт: эхний 100 хэрэглэгчид 50% хямдрал! Нэг удаагийн төлбөр. Захиалга биш. Насан туршийн лиценз.',
+    whyTitle: 'Яагаад AISpeech',
+    whyDesc: 'AISpeech-ийн локал архитектур нь клоуд-д суурилсан хувилбаруудын хамгийн чухал эрсдэлүүдийг арилгана.',
+    f1t: 'Мэдээллийн нууцлал', f1d: 'Засгийн газрын байгууллага, банк, хуулийн фирм, эмнэлгүүд дотоод мэдээллийг гадаад серверт илгээхийг хориглодог. AISpeech бүх зүйлийг локалд боловсруулна — дуу хоолой, файл хэзээ ч гарахгүй.',
+    f2t: 'Интернетгүй ажиллана', f2d: 'Клоуд аппууд холболт тасрахад зогсдог. AISpeech бүхэлдээ таны компьютер дээр ажиллана — лицензийн шалгалт ч локал файлаас уншина. Дэлхийн хаана ч 100% ажиллагаа.',
+    f3t: 'Маш хурдан хариу', f3d: 'Сүлжээний саатал байхгүй. AISpeech секундэд 20 удаа (~50ms) оролтыг шалгаж, текстийг Ctrl+V-ээр шууд курсор дээр бичнэ. Бодит цагийн dictation.',
+    f4t: 'Нэг удаагийн худалдан авалт', f4d: 'Клоуд аппууд сар бүр төлбөр авдаг учир нь серверийн зардалтай. AISpeech таны CPU, RAM ашигладаг — серверийн зардалгүй. Нэг удаа худалдаж аваад насан туршдаа ашиглана.',
+    f5t: 'Системтэй гүн холбогдсон', f5d: 'Вэб аппууд системийн hotkey, clipboard-д хандаж чаддаггүй. AISpeech Windows PowerShell, C# ашиглан ямар ч програмд (ERP, нягтлан бодох, тоглоом, чат) F6 дарж dictation хийнэ.',
+    toolsTitle: 'Бүгд-нэгдсэн хөрвүүлэгч',
+    howTitle: 'Хэрхэн ажилладаг',
+    s1t: 'Суулгах', s1d: 'Татаж аваад суулгагчийг ажиллуулна. Админ шаардлагагүй. 30 секунд.',
+    s2t: 'Ямар ч апп нээх', s2d: 'Word, Notepad, Chrome, Slack — текст бичих газарт курсор тавь.',
+    s3t: 'F6 дараад ярих', s3d: 'Эквалайзер асна. Таны яриа курсор дээр бодит цагт бичигдэнэ.',
+    s4t: 'Файл хөрвүүлэх', s4d: 'PDF, зургийн хэрэгслүүдийг ашиглана. Чирж тавиад дууслаа.',
+    specsTitle: 'Системийн шаардлага',
+    specsText: '<strong>Windows 10/11</strong> (64-bit) · <strong>Google Chrome</strong> суусан · Микрофонтой',
+    features: 'Боломжууд', tools: 'Хэрэгслүүд',
+  }
+};
+function switchLang(l) {
+  const t = T[l] || T.en;
+  document.querySelectorAll('#langToggle button').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  document.querySelector('.hero .subtitle').textContent = t.subtitle;
+  document.querySelector('.hero .desc').textContent = t.desc;
+  document.querySelector('.hero .privacy').textContent = t.privacy;
+  document.querySelector('#buy-btn').innerHTML = t.buy + ' — <s style="opacity:0.5">$6</s> $3';
+  document.querySelector('.hero .btn-outline').textContent = t.howLink;
+  document.querySelector('.price-note').textContent = t.priceNote;
+  document.querySelector('#features h2').textContent = t.whyTitle;
+  document.querySelector('#features > p').textContent = t.whyDesc;
+  const fs = document.querySelectorAll('.feature');
+  fs[0].querySelector('h3').textContent = t.f1t; fs[0].querySelector('p').textContent = t.f1d;
+  fs[1].querySelector('h3').textContent = t.f2t; fs[1].querySelector('p').textContent = t.f2d;
+  fs[2].querySelector('h3').textContent = t.f3t; fs[2].querySelector('p').textContent = t.f3d;
+  fs[3].querySelector('h3').textContent = t.f4t; fs[3].querySelector('p').textContent = t.f4d;
+  fs[4].querySelector('h3').textContent = t.f5t; fs[4].querySelector('p').textContent = t.f5d;
+  document.querySelector('#tools h2').textContent = t.toolsTitle;
+  document.querySelector('#how h2').textContent = t.howTitle;
+  const ss = document.querySelectorAll('.step');
+  ss[0].querySelector('h3').textContent = t.s1t; ss[0].querySelector('p').textContent = t.s1d;
+  ss[1].querySelector('h3').textContent = t.s2t; ss[1].querySelector('p').textContent = t.s2d;
+  ss[2].querySelector('h3').textContent = t.s3t; ss[2].querySelector('p').textContent = t.s3d;
+  ss[3].querySelector('h3').textContent = t.s4t; ss[3].querySelector('p').textContent = t.s4d;
+  document.querySelector('.specs h2').textContent = t.specsTitle;
+  document.querySelector('.specs p').innerHTML = t.specsText;
+  const navLinks = document.querySelectorAll('header nav > a:not(.btn-header)');
+  navLinks[0].textContent = t.features;
+  navLinks[1].textContent = t.tools;
+  navLinks[2].textContent = t.howLink;
+}
+</script>
 </body>
 </html>
