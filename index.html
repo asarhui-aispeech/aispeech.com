@@ -16,11 +16,13 @@
         /* Hero */
         .hero { text-align: center; padding: 80px 24px 50px; }
         .hero h1 { font-size: 3rem; color: var(--text); margin-bottom: 4px; letter-spacing: -1px; }
-        .aio-reveal { display: inline; }
-        .aio-letter { display: inline-block; overflow: hidden; vertical-align: bottom; }
-        .aio-letter span { display: block; transform: translateY(-100%); }
-        .aio-reveal.play .aio-letter span { animation: revealDown .5s cubic-bezier(.22,1,.36,1) forwards; }
-        @keyframes revealDown { to { transform: translateY(0); } }
+        .aio-word { display: inline-block; perspective: 300px; }
+        .aio-word span { display: inline-block; transform-origin: center top; transform: rotateX(-90deg); opacity: 0; }
+        .aio-flip .aio-word span { animation: flipDown .7s cubic-bezier(.23,1,.32,1) forwards; }
+        @keyframes flipDown {
+          0% { transform: rotateX(-90deg); opacity: 0; }
+          100% { transform: rotateX(0deg); opacity: 1; }
+        }
         .hero .subtitle { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 28px; }
         .hero .desc { font-size: 16px; color: var(--muted); max-width: 560px; margin: 0 auto 36px; }
         .hero .privacy { display: inline-flex; align-items: center; gap: 8px; background: rgba(22,163,74,0.05); border: 1px solid rgba(22,163,74,0.2); border-radius: 10px; padding: 14px 24px; font-size: 13px; color: var(--safe); font-weight: 600; margin-bottom: 36px; }
@@ -141,7 +143,7 @@
 
     <!-- Hero -->
     <div class="hero">
-        <h1>AISpeech + <span class="aio-reveal" id="aioReveal">All-in-One</span> Converter</h1>
+        <h1>AISpeech + <span class="aio-word"><span style="animation-delay:0s">All-</span></span><span class="aio-word"><span style="animation-delay:0.2s">in-</span></span><span class="aio-word"><span style="animation-delay:0.4s">One</span></span> Converter</h1>
         <div class="subtitle">Speech-to-Text & 20 Offline PDF/Image Tools</div>
         <p class="desc">One Windows app — dictate to any cursor with F6, plus convert, compress, merge, split, and protect your PDF & image files. Everything runs locally. Nothing leaves your computer.</p>
 
@@ -534,25 +536,14 @@ function switchLang(l) {
 </script>
 <script>
 (function(){
-  var el = document.getElementById('aioReveal');
-  if (!el) return;
-  var text = el.textContent;
-  el.innerHTML = '';
-  for (var i = 0; i < text.length; i++) {
-    var wrap = document.createElement('span');
-    wrap.className = 'aio-letter';
-    var inner = document.createElement('span');
-    inner.textContent = text[i] === ' ' ? ' ' : text[i];
-    inner.style.animationDelay = (i * 0.06) + 's';
-    wrap.appendChild(inner);
-    el.appendChild(wrap);
-  }
-  function play() { el.classList.remove('play'); void el.offsetWidth; el.classList.add('play'); }
+  var h1 = document.querySelector('.hero h1');
+  if (!h1) return;
+  function play() { h1.classList.remove('aio-flip'); void h1.offsetWidth; h1.classList.add('aio-flip'); }
   var obs = new IntersectionObserver(function(entries) {
     if (entries[0].isIntersecting) play();
-    else el.classList.remove('play');
+    else h1.classList.remove('aio-flip');
   }, { threshold: 0.5 });
-  obs.observe(el);
+  obs.observe(h1);
 })();
 </script>
 </body>
