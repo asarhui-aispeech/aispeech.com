@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AISpeech + All-in-One Converter — Speech-to-Text & 20 Offline Tools</title>
-    <meta name="description" content="Smart Windows desktop app: speech-to-text + 20 offline PDF & image converter tools in one app. No cloud, no subscriptions.">
+    <title>AISpeech + Бүгд-нэгдсэн хөрвүүлэгч — Яриа-Текст & 20 хэрэгсэл</title>
+    <meta name="description" content="Windows програм: яриа-текст + 20 офлайн PDF & зураг хөрвүүлэгч хэрэгсэл. Серверт юу ч илгээхгүй.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet">
@@ -16,7 +16,6 @@
 
         .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 
-        /* Hero */
         .hero { text-align: center; padding: 80px 24px 50px; }
         .hero h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 3rem; color: var(--text); margin-bottom: 4px; letter-spacing: -1.5px; }
         .aio-word > span { display: inline-block; clip-path: inset(0 0 100% 0); transition: color .3s ease; }
@@ -26,7 +25,6 @@
           100% { clip-path: inset(0 0 0 0); }
         }
         .aio-char { display: inline-block; transition: color .25s ease; }
-        .aio-char.red { color: var(--accent); }
         .hero .subtitle { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 28px; }
         .hero .desc { font-size: 16px; color: var(--muted); max-width: 560px; margin: 0 auto 36px; }
         .hero .privacy { display: inline-flex; align-items: center; gap: 8px; background: rgba(22,163,74,0.05); border: 1px solid rgba(22,163,74,0.2); border-radius: 10px; padding: 14px 24px; font-size: 13px; color: var(--safe); font-weight: 600; margin-bottom: 36px; }
@@ -39,7 +37,6 @@
         .btn-outline:hover { border-color: var(--dim); background: rgba(0,0,0,0.02); }
         .price-note { font-size: 12px; color: var(--muted); }
 
-        /* Features */
         .section { padding: 50px 0; }
         .section h2 { font-size: 20px; color: var(--text); margin-bottom: 24px; text-align: center; letter-spacing: 1px; text-transform: uppercase; }
         .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
@@ -49,25 +46,21 @@
         .feature h3 { font-size: 14px; color: var(--text); margin-bottom: 6px; }
         .feature p { font-size: 12px; color: var(--muted); line-height: 1.6; }
 
-        /* Tools grid */
         .tools-section { text-align: center; padding: 40px 0; }
         .cat-label { font-size: 12px; color: var(--dim); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin: 24px 0 12px; }
         .tools-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
         .tool-chip { background: var(--card); border: .5px solid var(--border); border-radius: 8px; padding: 8px 14px; font-size: 11px; color: var(--text); transition: all .2s; }
         .tool-chip:hover { border-color: var(--safe); color: var(--safe); }
 
-        /* How it works */
         .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; counter-reset: step; }
         .step { background: var(--card); border: .5px solid var(--border); border-radius: 12px; padding: 24px; counter-increment: step; }
         .step::before { content: counter(step); display: block; font-size: 28px; font-weight: 700; color: var(--safe); opacity: 0.4; margin-bottom: 8px; }
         .step h3 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
         .step p { font-size: 12px; color: var(--muted); }
 
-        /* Specs */
         .specs { text-align: center; padding: 40px 0 60px; }
         .specs p { font-size: 13px; color: var(--muted); }
 
-        /* Try Tool Demo */
         .demo { text-align: center; padding: 50px 0; border-top: .5px solid var(--border); }
         .demo h2 { font-size: 20px; color: var(--text); margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
         .demo .demo-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
@@ -104,7 +97,6 @@
         .compress-label { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
         .specs strong { color: var(--text); }
 
-        /* Header */
         header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: .5px solid var(--border); padding: 14px 0; }
         header .container { display: flex; align-items: center; justify-content: space-between; }
         header .logo { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; text-decoration: none; }
@@ -114,7 +106,6 @@
         .btn-header { font-size: 12px; padding: 8px 20px; border-radius: 8px; background: var(--text); color: var(--bg); font-weight: 600; text-decoration: none; transition: all .2s; }
         .btn-header:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
-        /* Footer */
         footer { border-top: .5px solid var(--border); padding: 20px 0; text-align: center; font-size: 11px; color: var(--muted); }
         footer span { color: var(--text); font-weight: 600; }
 
@@ -129,195 +120,185 @@
 
     <header>
         <div class="container">
-            <a href="./" class="logo">AISpeech</a>
+            <a href="mn.html" class="logo">AISpeech</a>
             <nav>
-                <a href="#features">Features</a>
-                <a href="#tools">Tools</a>
-                <a href="#how">How It Works</a>
-                <a href="mn.html" style="font-size:11px;padding:5px 12px;border:1px solid var(--border);border-radius:6px;font-weight:600;color:var(--muted);">MN</a>
+                <a href="#features">Боломжууд</a>
+                <a href="#tools">Хэрэгслүүд</a>
+                <a href="#how">Хэрхэн ажилладаг</a>
+                <a href="index.html" style="font-size:11px;padding:5px 12px;border:1px solid var(--border);border-radius:6px;font-weight:600;color:var(--muted);">EN</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero -->
     <div class="hero">
         <h1>AISpeech + <span class="aio-word"><span style="animation-delay:0s"><span class="aio-char">A</span><span class="aio-char">l</span><span class="aio-char">l</span><span class="aio-char">-</span></span></span><span class="aio-word"><span style="animation-delay:0.2s"><span class="aio-char">i</span><span class="aio-char">n</span><span class="aio-char">-</span></span></span><span class="aio-word"><span style="animation-delay:0.4s"><span class="aio-char">O</span><span class="aio-char">n</span><span class="aio-char">e</span></span></span> Converter</h1>
-        <div class="subtitle">Speech-to-Text & 20 Offline PDF/Image Tools</div>
-        <p class="desc">One Windows app — dictate to any cursor with F6, plus convert, compress, merge, split, and protect your PDF & image files. Everything runs locally. Nothing leaves your computer.</p>
+        <div class="subtitle">Яриа-Текст + 20 файл хөрвүүлэгч хэрэгсэл</div>
+        <p class="desc">Нэг програм — F6 дарж ямар ч газар яриагаа текст болгож, файлаа хөрвүүлж, шахаж, нэгтгэж, хамгаална. Бүгд таны компьютер дотор. Интернетгүй ажиллана.</p>
 
-        <div class="privacy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Your files and voice never leave your computer</div>
+        <div class="privacy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Таны файл, дуу хоолой компьютерээс хэзээ ч гарахгүй</div>
 
         <div class="cta-row">
-            <a href="https://buy.paddle.com/v3/checkout/buy?price=pri_01kv15xdrz1e69pjy2vm3rqp18&discount=dsc_01kv16fbnk53qmqb439kd23fg8" class="btn btn-primary" id="buy-btn" target="_blank">Buy Now — <s style="opacity:0.5">$15</s> $5</a>
-            <a href="#how" class="btn btn-outline">How It Works</a>
+            <a href="https://buy.paddle.com/v3/checkout/buy?price=pri_01kv15xdrz1e69pjy2vm3rqp18&discount=dsc_01kv16fbnk53qmqb439kd23fg8" class="btn btn-primary" id="buy-btn" target="_blank">Худалдаж авах — <s style="opacity:0.5">27,000₮</s> 9,000₮</a>
+            <a href="#how" class="btn btn-outline">Хэрхэн ажилладаг</a>
         </div>
-        <div class="price-note">Launch offer: first 100 customers get 66% off! One-time payment. No subscription. Lifetime license.</div>
+        <div class="price-note">Нээлтийн хөнгөлөлт: эхний 100 хэрэглэгчид 66% хямдрал! Нэг удаагийн төлбөр. Захиалга биш. Насан туршийн лиценз.</div>
     </div>
 
     <div class="container">
 
-        <!-- Features -->
         <div class="section" id="features">
-            <h2>Why AISpeech + Converter</h2>
-            <p style="text-align:center; font-size:13px; color:var(--muted); max-width:600px; margin:0 auto 28px;">Speech-to-text and 20 converter tools in one offline app. No cloud servers, no subscriptions — your data never leaves your computer.</p>
+            <h2>Яагаад AISpeech сонгох вэ</h2>
+            <p style="text-align:center; font-size:13px; color:var(--muted); max-width:600px; margin:0 auto 28px;">Яриа-текст болон 20 хөрвүүлэгч хэрэгсэл нэг програм дотор. Сервергүй, захиалгагүй — мэдээлэл компьютерээс гарахгүй.</p>
             <div class="features">
                 <div class="feature">
                     <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--safe)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-                    <h3>Data Privacy & Security</h3>
-                    <p>Government agencies, banks, law firms, and hospitals are prohibited from sending internal data to external servers. AISpeech processes everything locally — your voice and files never leave your machine. All data is processed in memory and discarded. Zero leak risk.</p>
+                    <h3>Мэдээллийн нууцлал</h3>
+                    <p>Засгийн газрын байгууллага, банк, хуулийн фирм, эмнэлгүүд дотоод мэдээллийг гадаад серверт илгээхийг хориглодог. Бүх зүйлийг зөвхөн таны компьютер дотор боловсруулна — дуу хоолой, файл хэзээ ч гадагш гарахгүй.</p>
                 </div>
                 <div class="feature">
                     <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--safe)" stroke-width="1.5" stroke-linecap="round"><path d="M2 12h20M12 2a15.3 15.3 0 010 20 15.3 15.3 0 010-20"/><circle cx="12" cy="12" r="10"/></svg></div>
-                    <h3>Works Without Internet</h3>
-                    <p>Cloud-based apps freeze when your connection drops or slows down. AISpeech runs entirely on your local machine — even license validation reads from a local file. 100% uptime regardless of network conditions, anywhere in the world.</p>
+                    <h3>Интернетгүй ажиллана</h3>
+                    <p>Серверт суурилсан програмууд холболт тасрахад зогсдог. Энэ програм бүхэлдээ таны компьютер дээр ажиллана — лицензийн шалгалт ч дотоод файлаас уншина. Дэлхийн хаана ч тасралтгүй ажиллана.</p>
                 </div>
                 <div class="feature">
                     <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--safe)" stroke-width="1.5" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-                    <h3>Ultra-Low Latency</h3>
-                    <p>No network round-trip. No waiting for a server response. AISpeech polls input 20 times per second (~50ms) and pastes text at your cursor instantly via Ctrl+V. It feels like you're typing at full speed — true real-time dictation.</p>
+                    <h3>Маш хурдан хариу</h3>
+                    <p>Сүлжээний саатал байхгүй. Секундэд 20 удаа оролтыг шалгаж, текстийг шууд курсор дээр бичнэ. Бодит цагийн бичлэг — бичиж буй хурдаар тань хөл нийлнэ.</p>
                 </div>
                 <div class="feature">
                     <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--safe)" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-                    <h3>One-Time Purchase, Lifetime License</h3>
-                    <p>Cloud apps charge monthly because they pay for servers. AISpeech uses your own CPU and RAM — no server costs. That means one purchase, lifetime ownership. No recurring fees, no surprise charges, no price hikes.</p>
+                    <h3>Нэг удаагийн худалдан авалт</h3>
+                    <p>Серверт суурилсан програмууд сар бүр төлбөр авдаг учир нь серверийн зардалтай. Энэ програм таны компьютерийн хүчин чадлыг ашигладаг — серверийн зардалгүй. Нэг удаа худалдаж аваад насан туршдаа ашиглана.</p>
                 </div>
                 <div class="feature">
                     <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--safe)" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-                    <h3>Deep OS Integration</h3>
-                    <p>Web-based apps can't access system hotkeys or clipboard. AISpeech uses native Windows PowerShell and C# to integrate deeply with your OS — press F6 in any app (ERP, accounting, games, chat) and dictate. The lime equaliser floats on top, invisible until you need it.</p>
+                    <h3>Системтэй гүн холбогдсон</h3>
+                    <p>Вэб програмууд системийн товчлол, санах ойд хандаж чаддаггүй. Энэ програм ямар ч програмд (нягтлан бодох, тоглоом, чат, бичиг баримт) F6 дарж яриагаа текст болгоно. Эквалайзер дэлгэцийн дээр хөвөн харагдана.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Tools -->
         <div class="tools-section" id="tools">
-            <h2>All-In-One Converter</h2>
-            <div class="cat-label">PDF Tools — 10</div>
+            <h2>Бүгд-нэгдсэн хөрвүүлэгч</h2>
+            <div class="cat-label">PDF хэрэгслүүд — 10</div>
             <div class="tools-grid">
-                <div class="tool-chip">Merge PDF</div>
-                <div class="tool-chip">Split PDF</div>
-                <div class="tool-chip">Compress PDF</div>
-                <div class="tool-chip">Rotate PDF</div>
-                <div class="tool-chip">Protect PDF</div>
-                <div class="tool-chip">Page Numbers</div>
-                <div class="tool-chip">Extract Pages</div>
-                <div class="tool-chip">Delete Pages</div>
-                <div class="tool-chip">Images → PDF</div>
-                <div class="tool-chip">PDF → Images</div>
+                <div class="tool-chip">PDF нэгтгэх</div>
+                <div class="tool-chip">PDF хуваах</div>
+                <div class="tool-chip">PDF шахах</div>
+                <div class="tool-chip">PDF эргүүлэх</div>
+                <div class="tool-chip">PDF хамгаалах</div>
+                <div class="tool-chip">Хуудас дугаарлах</div>
+                <div class="tool-chip">Хуудас задлах</div>
+                <div class="tool-chip">Хуудас устгах</div>
+                <div class="tool-chip">Зураг → PDF</div>
+                <div class="tool-chip">PDF → Зураг</div>
             </div>
-            <div class="cat-label">Image Tools — 10</div>
+            <div class="cat-label">Зургийн хэрэгслүүд — 10</div>
             <div class="tools-grid">
                 <div class="tool-chip">JPG → PNG</div>
                 <div class="tool-chip">PNG → JPG</div>
-                <div class="tool-chip">To WebP</div>
-                <div class="tool-chip">Resize</div>
-                <div class="tool-chip">Rotate 90°</div>
-                <div class="tool-chip">Mirror</div>
-                <div class="tool-chip">Crop</div>
-                <div class="tool-chip">Grayscale</div>
-                <div class="tool-chip">Brightness</div>
-                <div class="tool-chip">Watermark</div>
+                <div class="tool-chip">WebP болгох</div>
+                <div class="tool-chip">Хэмжээ өөрчлөх</div>
+                <div class="tool-chip">90° эргүүлэх</div>
+                <div class="tool-chip">Толин тусгал</div>
+                <div class="tool-chip">Тайрах</div>
+                <div class="tool-chip">Хар цагаан</div>
+                <div class="tool-chip">Гэрэлтүүлэг</div>
+                <div class="tool-chip">Усан тэмдэг</div>
             </div>
         </div>
 
-        <!-- Try Free Tool -->
         <div class="demo" id="demo">
-            <h2 id="demoTitle">Try It Free</h2>
-            <p class="demo-sub" id="demoSub">No upload, no server — runs entirely in your browser.</p>
+            <h2>Үнэгүй туршаарай</h2>
+            <p class="demo-sub">Сервергүй, хөтөч дотроо бүхэлдээ ажиллана.</p>
             <div class="demo-tabs">
-                <button class="demo-tab active" onclick="switchDemo('pdf')">Images → PDF</button>
-                <button class="demo-tab" onclick="switchDemo('compress')">Compress Image</button>
+                <button class="demo-tab active" onclick="switchDemo('pdf')">Зураг → PDF</button>
+                <button class="demo-tab" onclick="switchDemo('compress')">Зураг шахах</button>
             </div>
 
-            <!-- Panel 1: Images → PDF -->
             <div class="demo-panel active" id="panelPdf">
                 <div class="demo-box" id="dropZone">
                     <div class="demo-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-                    <p class="demo-text" id="dropText">Drag & drop images here or <strong>click to browse</strong></p>
+                    <p class="demo-text">Зургаа энд чирнэ үү эсвэл <strong>сонгох</strong></p>
                     <input type="file" id="fileInput" accept="image/*" multiple style="display:none"/>
                     <div class="demo-thumbs" id="thumbs"></div>
                 </div>
                 <div class="demo-actions" id="demoActions">
-                    <button class="demo-convert" id="convertBtn">Convert to PDF</button>
-                    <button class="demo-clear" id="clearBtn">Clear</button>
+                    <button class="demo-convert" id="convertBtn">PDF болгох</button>
+                    <button class="demo-clear" id="clearBtn">Цэвэрлэх</button>
                     <span class="demo-count" id="imgCount"></span>
                 </div>
                 <div class="demo-result" id="demoResult">
-                    <a id="downloadLink" href="#" download="images.pdf">⬇ Download PDF</a>
+                    <a id="downloadLink" href="#" download="images.pdf">⬇ PDF татах</a>
                 </div>
             </div>
 
-            <!-- Panel 2: Compress Image -->
             <div class="demo-panel" id="panelCompress">
                 <div class="demo-box" id="compDropZone">
                     <div class="demo-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
-                    <p class="demo-text" id="compDropText">Drag & drop an image here or <strong>click to browse</strong></p>
+                    <p class="demo-text">Зургаа энд чирнэ үү эсвэл <strong>сонгох</strong></p>
                     <input type="file" id="compFileInput" accept="image/*" style="display:none"/>
                     <div class="demo-thumbs" id="compThumbs"></div>
                 </div>
-                <div class="compress-label" id="qualityLabel">Quality: <strong>60%</strong></div>
+                <div class="compress-label" id="qualityLabel">Чанар: <strong>60%</strong></div>
                 <input type="range" class="compress-slider" id="qualitySlider" min="10" max="100" value="60"/>
                 <div class="demo-actions" id="compActions">
-                    <button class="demo-convert" id="compressBtn">Compress</button>
-                    <button class="demo-clear" id="compClearBtn">Clear</button>
+                    <button class="demo-convert" id="compressBtn">Шахах</button>
+                    <button class="demo-clear" id="compClearBtn">Цэвэрлэх</button>
                 </div>
                 <div class="compress-info" id="compInfo"></div>
                 <div class="demo-result" id="compResult">
-                    <a id="compDownloadLink" href="#" download="compressed.jpg">⬇ Download Compressed</a>
+                    <a id="compDownloadLink" href="#" download="compressed.jpg">⬇ Шахсан зураг татах</a>
                 </div>
             </div>
 
-            <p class="demo-cta" id="demoCta">This is <strong>2 of 21 tools</strong> included in AISpeech. Get all for just $5.</p>
+            <p class="demo-cta">Энэ бол нийт <strong>21 хэрэгслийн 2</strong> нь. Бүгдийг 9,000₮-өөр аваарай.</p>
         </div>
 
-        <!-- How it works -->
         <div class="section" id="how">
-            <h2>How It Works</h2>
+            <h2>Хэрхэн ажилладаг</h2>
             <div class="steps">
                 <div class="step">
-                    <h3>Install</h3>
-                    <p>Download, run the installer. No admin required. Takes 30 seconds.</p>
+                    <h3>Суулгах</h3>
+                    <p>Татаж аваад суулгагчийг ажиллуулна. Удирдагчийн эрх шаардлагагүй. 30 секунд.</p>
                 </div>
                 <div class="step">
-                    <h3>Open any app</h3>
-                    <p>Word, Notepad, Chrome, Slack — place your cursor where you want text.</p>
+                    <h3>Ямар ч програм нээх</h3>
+                    <p>Бичиг баримт, тэмдэглэл, хөтөч, чат — текст бичих газарт курсор тавь.</p>
                 </div>
                 <div class="step">
-                    <h3>Press F6 & speak</h3>
-                    <p>The equaliser lights up. Your words appear at the cursor in real-time.</p>
+                    <h3>F6 дараад ярих</h3>
+                    <p>Эквалайзер асна. Таны яриа курсор дээр бодит цагт бичигдэнэ.</p>
                 </div>
                 <div class="step">
-                    <h3>Convert files</h3>
-                    <p>Use the built-in converter for PDF and image tasks. Drag, drop, done.</p>
+                    <h3>Файл хөрвүүлэх</h3>
+                    <p>Файл хөрвүүлэх хэрэгслүүдийг ашиглана. Чирж тавиад дууслаа.</p>
                 </div>
             </div>
         </div>
 
-        <!-- System Requirements -->
         <div class="specs">
-            <h2>System Requirements</h2>
-            <p><strong>Windows 10/11</strong> (64-bit) · <strong>Google Chrome</strong> installed · Active microphone</p>
+            <h2>Системийн шаардлага</h2>
+            <p><strong>Windows 10/11</strong> (64 бит) · <strong>Google Chrome</strong> суусан · Микрофонтой</p>
         </div>
 
     </div>
 
     <footer>
         <div class="container">
-            <span>AISpeech</span> · © 2025 <svg width="60" height="22" viewBox="0 0 120 42" style="vertical-align:middle"><text x="0" y="30" font-family="'Segoe UI',system-ui,sans-serif" font-size="28" font-weight="700" fill="#4d4d4d">So</text><path d="M44,22 Q44,42 64,42 L112,42 Q120,42 120,34 L120,8 Q120,0 112,0 L56,0 Q44,0 44,22 Z" fill="#e8453c"/><text x="58" y="30" font-family="'Segoe UI',system-ui,sans-serif" font-size="28" font-weight="700" fill="#fff">Pro</text></svg>. All rights reserved.
-            <div style="margin-top:8px;"><a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a> · <a href="refund.html">Refund Policy</a></div>
+            <span>AISpeech</span> · © 2025 <svg width="60" height="22" viewBox="0 0 120 42" style="vertical-align:middle"><text x="0" y="30" font-family="'Segoe UI',system-ui,sans-serif" font-size="28" font-weight="700" fill="#4d4d4d">So</text><path d="M44,22 Q44,42 64,42 L112,42 Q120,42 120,34 L120,8 Q120,0 112,0 L56,0 Q44,0 44,22 Z" fill="#e8453c"/><text x="58" y="30" font-family="'Segoe UI',system-ui,sans-serif" font-size="28" font-weight="700" fill="#fff">Pro</text></svg>. Бүх эрх хуулиар хамгаалагдсан.
+            <div style="margin-top:8px;"><a href="terms.html">Үйлчилгээний нөхцөл</a> · <a href="privacy.html">Нууцлалын бодлого</a> · <a href="refund.html">Буцаалтын бодлого</a></div>
         </div>
     </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-// ── Tab switching ──
 function switchDemo(tab) {
   document.querySelectorAll('.demo-tab').forEach((b,i) => b.classList.toggle('active', (tab==='pdf'?0:1)===i));
   document.getElementById('panelPdf').classList.toggle('active', tab==='pdf');
   document.getElementById('panelCompress').classList.toggle('active', tab==='compress');
 }
 
-// ── Image Compress Demo ──
 (function(){
   const drop = document.getElementById('compDropZone');
   const input = document.getElementById('compFileInput');
@@ -337,7 +318,7 @@ function switchDemo(tab) {
   drop.addEventListener('dragleave', () => drop.classList.remove('drag-over'));
   drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('drag-over'); setFile(e.dataTransfer.files[0]); });
   input.addEventListener('change', () => { setFile(input.files[0]); input.value = ''; });
-  slider.addEventListener('input', () => { qualityLabel.innerHTML = 'Quality: <strong>' + slider.value + '%</strong>'; });
+  slider.addEventListener('input', () => { qualityLabel.innerHTML = 'Чанар: <strong>' + slider.value + '%</strong>'; });
 
   function setFile(f) {
     if (!f || !f.type.startsWith('image/')) return;
@@ -346,13 +327,13 @@ function switchDemo(tab) {
     const img = document.createElement('img'); img.src = URL.createObjectURL(f); thumbs.appendChild(img);
     actions.classList.add('show');
     result.classList.remove('show');
-    info.innerHTML = 'Original: <strong>' + (f.size/1024).toFixed(0) + ' KB</strong>';
+    info.innerHTML = 'Анхны хэмжээ: <strong>' + (f.size/1024).toFixed(0) + ' KB</strong>';
   }
   clearBtn.addEventListener('click', () => { file=null; thumbs.innerHTML=''; actions.classList.remove('show'); result.classList.remove('show'); info.innerHTML=''; });
 
   compressBtn.addEventListener('click', () => {
     if (!file) return;
-    compressBtn.disabled = true; compressBtn.textContent = 'Compressing...';
+    compressBtn.disabled = true; compressBtn.textContent = 'Шахаж байна...';
     const img = new Image();
     img.onload = () => {
       const c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
@@ -361,17 +342,16 @@ function switchDemo(tab) {
       c.toBlob(blob => {
         const out = blob.size < file.size ? blob : file;
         const saved = ((1 - out.size / file.size) * 100).toFixed(0);
-        info.innerHTML = 'Original: <strong>' + (file.size/1024).toFixed(0) + ' KB</strong> → Compressed: <strong>' + (out.size/1024).toFixed(0) + ' KB</strong> (saved ' + saved + '%)';
+        info.innerHTML = 'Анхны: <strong>' + (file.size/1024).toFixed(0) + ' KB</strong> → Шахсан: <strong>' + (out.size/1024).toFixed(0) + ' KB</strong> (' + saved + '% хэмнэлт)';
         dlLink.href = URL.createObjectURL(out);
         result.classList.add('show');
-        compressBtn.disabled = false; compressBtn.textContent = 'Compress';
+        compressBtn.disabled = false; compressBtn.textContent = 'Шахах';
       }, 'image/jpeg', q);
     };
     img.src = URL.createObjectURL(file);
   });
 })();
 
-// ── Image → PDF Demo ──
 (function(){
   const drop = document.getElementById('dropZone');
   const input = document.getElementById('fileInput');
@@ -397,7 +377,7 @@ function switchDemo(tab) {
   function updateUI() {
     thumbs.innerHTML = '';
     files.forEach(f => { const img = document.createElement('img'); img.src = URL.createObjectURL(f); thumbs.appendChild(img); });
-    countEl.textContent = files.length + ' image' + (files.length !== 1 ? 's' : '');
+    countEl.textContent = files.length + ' зураг';
     actions.classList.toggle('show', files.length > 0);
     result.classList.remove('show');
   }
@@ -406,7 +386,7 @@ function switchDemo(tab) {
   convertBtn.addEventListener('click', async () => {
     if (!files.length) return;
     convertBtn.disabled = true;
-    convertBtn.textContent = 'Converting...';
+    convertBtn.textContent = 'Хөрвүүлж байна...';
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     for (let i = 0; i < files.length; i++) {
@@ -426,7 +406,7 @@ function switchDemo(tab) {
     dlLink.href = URL.createObjectURL(blob);
     result.classList.add('show');
     convertBtn.disabled = false;
-    convertBtn.textContent = 'Convert to PDF';
+    convertBtn.textContent = 'PDF болгох';
   });
 })();
 </script>
