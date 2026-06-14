@@ -55,6 +55,31 @@
         /* Specs */
         .specs { text-align: center; padding: 40px 0 60px; }
         .specs p { font-size: 13px; color: var(--muted); }
+
+        /* Try Tool Demo */
+        .demo { text-align: center; padding: 50px 0; border-top: .5px solid var(--border); }
+        .demo h2 { font-size: 20px; color: #fff; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+        .demo .demo-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+        .demo-box { max-width: 480px; margin: 0 auto; background: var(--card); border: 1.5px dashed var(--border); border-radius: 14px; padding: 36px 24px; transition: border-color .3s; cursor: pointer; position: relative; }
+        .demo-box:hover, .demo-box.drag-over { border-color: var(--lime); }
+        .demo-box .demo-icon { font-size: 36px; margin-bottom: 10px; }
+        .demo-box .demo-text { font-size: 13px; color: var(--muted); }
+        .demo-box .demo-text strong { color: var(--lime); }
+        .demo-thumbs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 16px; min-height: 20px; }
+        .demo-thumbs img { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
+        .demo-actions { margin-top: 18px; display: none; gap: 10px; justify-content: center; align-items: center; }
+        .demo-actions.show { display: flex; }
+        .demo-actions button { padding: 12px 32px; border-radius: 10px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; transition: all .2s; }
+        .demo-convert { background: var(--lime); color: var(--bg); }
+        .demo-convert:hover { filter: brightness(1.1); transform: translateY(-1px); }
+        .demo-clear { background: transparent; color: var(--muted); border: 1px solid var(--border) !important; }
+        .demo-count { font-size: 12px; color: var(--muted); }
+        .demo-result { margin-top: 16px; display: none; }
+        .demo-result.show { display: block; }
+        .demo-result a { display: inline-flex; align-items: center; gap: 6px; padding: 12px 28px; background: rgba(204,255,0,0.1); border: 1px solid rgba(204,255,0,0.3); border-radius: 10px; color: var(--lime); font-weight: 600; font-size: 14px; text-decoration: none; transition: all .2s; }
+        .demo-result a:hover { background: rgba(204,255,0,0.15); transform: translateY(-1px); }
+        .demo-cta { margin-top: 24px; font-size: 13px; color: var(--muted); }
+        .demo-cta strong { color: var(--lime); }
         .specs strong { color: var(--text); }
 
         /* Header */
@@ -178,6 +203,27 @@
             </div>
         </div>
 
+        <!-- Try Free Tool -->
+        <div class="demo" id="demo">
+            <h2 id="demoTitle">Try It Free — Images → PDF</h2>
+            <p class="demo-sub" id="demoSub">Drop your images here and convert to PDF instantly. No upload, no server — runs in your browser.</p>
+            <div class="demo-box" id="dropZone">
+                <div class="demo-icon">📄</div>
+                <p class="demo-text" id="dropText">Drag & drop images here or <strong>click to browse</strong></p>
+                <input type="file" id="fileInput" accept="image/*" multiple style="display:none"/>
+                <div class="demo-thumbs" id="thumbs"></div>
+            </div>
+            <div class="demo-actions" id="demoActions">
+                <button class="demo-convert" id="convertBtn">Convert to PDF</button>
+                <button class="demo-clear" id="clearBtn">Clear</button>
+                <span class="demo-count" id="imgCount"></span>
+            </div>
+            <div class="demo-result" id="demoResult">
+                <a id="downloadLink" href="#" download="images.pdf">⬇ Download PDF</a>
+            </div>
+            <p class="demo-cta" id="demoCta">This is <strong>1 of 21 tools</strong> included in AISpeech. Get all for just $5.</p>
+        </div>
+
         <!-- How it works -->
         <div class="section" id="how">
             <h2>How It Works</h2>
@@ -216,6 +262,67 @@
         </div>
     </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+// ── Image → PDF Demo ──
+(function(){
+  const drop = document.getElementById('dropZone');
+  const input = document.getElementById('fileInput');
+  const thumbs = document.getElementById('thumbs');
+  const actions = document.getElementById('demoActions');
+  const convertBtn = document.getElementById('convertBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const countEl = document.getElementById('imgCount');
+  const result = document.getElementById('demoResult');
+  const dlLink = document.getElementById('downloadLink');
+  let files = [];
+
+  drop.addEventListener('click', () => input.click());
+  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag-over'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('drag-over'));
+  drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
+  input.addEventListener('change', () => { addFiles(input.files); input.value = ''; });
+
+  function addFiles(fl) {
+    for (const f of fl) { if (f.type.startsWith('image/')) files.push(f); }
+    updateUI();
+  }
+  function updateUI() {
+    thumbs.innerHTML = '';
+    files.forEach(f => { const img = document.createElement('img'); img.src = URL.createObjectURL(f); thumbs.appendChild(img); });
+    countEl.textContent = files.length + ' image' + (files.length !== 1 ? 's' : '');
+    actions.classList.toggle('show', files.length > 0);
+    result.classList.remove('show');
+  }
+  clearBtn.addEventListener('click', () => { files = []; updateUI(); });
+
+  convertBtn.addEventListener('click', async () => {
+    if (!files.length) return;
+    convertBtn.disabled = true;
+    convertBtn.textContent = 'Converting...';
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    for (let i = 0; i < files.length; i++) {
+      const url = URL.createObjectURL(files[i]);
+      const img = new Image();
+      await new Promise(r => { img.onload = r; img.src = url; });
+      const pw = doc.internal.pageSize.getWidth();
+      const ph = doc.internal.pageSize.getHeight();
+      const ratio = Math.min(pw / img.width, ph / img.height) * 0.9;
+      const w = img.width * ratio;
+      const h = img.height * ratio;
+      if (i > 0) doc.addPage();
+      doc.addImage(img, 'JPEG', (pw - w) / 2, (ph - h) / 2, w, h);
+      URL.revokeObjectURL(url);
+    }
+    const blob = doc.output('blob');
+    dlLink.href = URL.createObjectURL(blob);
+    result.classList.add('show');
+    convertBtn.disabled = false;
+    convertBtn.textContent = 'Convert to PDF';
+  });
+})();
+</script>
 <script>
 const T = {
   en: {
@@ -241,6 +348,10 @@ const T = {
     specsTitle: 'System Requirements',
     specsText: '<strong>Windows 10/11</strong> (64-bit) · <strong>Google Chrome</strong> installed · Active microphone',
     features: 'Features', tools: 'Tools',
+    demoTitle: 'Try It Free — Images → PDF',
+    demoSub: 'Drop your images here and convert to PDF instantly. No upload, no server — runs in your browser.',
+    dropText: 'Drag & drop images here or <strong>click to browse</strong>',
+    demoCta: 'This is <strong>1 of 21 tools</strong> included in AISpeech. Get all for just $5.',
   },
   mn: {
     subtitle: 'Cloud-гүй. Эрсдэлгүй. Захиалгагүй.',
@@ -265,6 +376,10 @@ const T = {
     specsTitle: 'Системийн шаардлага',
     specsText: '<strong>Windows 10/11</strong> (64-bit) · <strong>Google Chrome</strong> суусан · Микрофонтой',
     features: 'Боломжууд', tools: 'Хэрэгслүүд',
+    demoTitle: 'Үнэгүй туршаарай — Зураг → PDF',
+    demoSub: 'Зургаа энд чирээд PDF болгоно. Сервергүй, browser дотроо ажиллана.',
+    dropText: 'Зургаа энд чирнэ үү эсвэл <strong>сонгох</strong>',
+    demoCta: 'Энэ бол AISpeech-д багтсан <strong>21 хэрэгслийн 1</strong>. Бүгдийг $5-аар аваарай.',
   }
 };
 function switchLang(l) {
@@ -293,6 +408,10 @@ function switchLang(l) {
   ss[3].querySelector('h3').textContent = t.s4t; ss[3].querySelector('p').textContent = t.s4d;
   document.querySelector('.specs h2').textContent = t.specsTitle;
   document.querySelector('.specs p').innerHTML = t.specsText;
+  document.getElementById('demoTitle').textContent = t.demoTitle;
+  document.getElementById('demoSub').textContent = t.demoSub;
+  document.getElementById('dropText').innerHTML = t.dropText;
+  document.getElementById('demoCta').innerHTML = t.demoCta;
   const navLinks = document.querySelectorAll('header nav > a:not(.btn-header)');
   navLinks[0].textContent = t.features;
   navLinks[1].textContent = t.tools;
