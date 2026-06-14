@@ -19,12 +19,11 @@
         /* Hero */
         .hero { text-align: center; padding: 80px 24px 50px; }
         .hero h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 3rem; color: var(--text); margin-bottom: 4px; letter-spacing: -1.5px; }
-        .aio-word { display: inline-block; perspective: 300px; }
-        .aio-word span { display: inline-block; transform-origin: center top; transform: rotateX(-90deg); opacity: 0; }
-        .aio-flip .aio-word span { animation: flipDown .7s cubic-bezier(.23,1,.32,1) forwards; }
-        @keyframes flipDown {
-          0% { transform: rotateX(-90deg); opacity: 0; }
-          100% { transform: rotateX(0deg); opacity: 1; }
+        .aio-word > span { display: inline-block; clip-path: inset(0 0 100% 0); transition: color .3s ease; }
+        .aio-flip .aio-word > span { animation: revealDown 1.2s ease forwards; }
+        @keyframes revealDown {
+          0% { clip-path: inset(0 0 100% 0); }
+          100% { clip-path: inset(0 0 0 0); }
         }
         .aio-char { display: inline-block; transition: color .25s ease; }
         .aio-char.red { color: var(--accent); }
