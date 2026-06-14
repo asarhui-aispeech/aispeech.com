@@ -354,9 +354,10 @@ function switchDemo(tab) {
       c.getContext('2d').drawImage(img, 0, 0);
       const q = slider.value / 100;
       c.toBlob(blob => {
-        const saved = ((1 - blob.size / file.size) * 100).toFixed(0);
-        info.innerHTML = 'Original: <strong>' + (file.size/1024).toFixed(0) + ' KB</strong> → Compressed: <strong>' + (blob.size/1024).toFixed(0) + ' KB</strong> (saved ' + saved + '%)';
-        dlLink.href = URL.createObjectURL(blob);
+        const out = blob.size < file.size ? blob : file;
+        const saved = ((1 - out.size / file.size) * 100).toFixed(0);
+        info.innerHTML = 'Original: <strong>' + (file.size/1024).toFixed(0) + ' KB</strong> → Compressed: <strong>' + (out.size/1024).toFixed(0) + ' KB</strong> (saved ' + saved + '%)';
+        dlLink.href = URL.createObjectURL(out);
         result.classList.add('show');
         compressBtn.disabled = false; compressBtn.textContent = 'Compress';
       }, 'image/jpeg', q);
