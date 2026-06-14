@@ -543,25 +543,34 @@ function switchLang(l) {
 (function(){
   var h1 = document.querySelector('.hero h1');
   if (!h1) return;
-  var chars = h1.querySelectorAll('.aio-char');
+  var words = h1.querySelectorAll('.aio-word');
   var waveTimer;
+  var speed = 1000;
   function redWave() {
     var i = 0;
-    waveTimer = setInterval(function() {
-      if (i > 0) chars[i - 1].classList.remove('red');
-      if (i < chars.length) { chars[i].classList.add('red'); i++; }
-      else { clearInterval(waveTimer); chars[chars.length - 1].classList.remove('red'); }
-    }, 120);
+    function step() {
+      if (i > 0) words[i - 1].style.color = '';
+      if (i < words.length) {
+        words[i].style.color = 'var(--safe)';
+        i++;
+        waveTimer = setTimeout(step, speed);
+      } else {
+        words[words.length - 1].style.color = '';
+        speed = Math.min(speed + 200, 2000);
+        waveTimer = setTimeout(redWave, 800);
+      }
+    }
+    step();
   }
   function play() {
-    clearInterval(waveTimer);
-    chars.forEach(function(c) { c.classList.remove('red'); });
+    clearTimeout(waveTimer);
+    words.forEach(function(w) { w.style.color = ''; });
     h1.classList.remove('aio-flip'); void h1.offsetWidth; h1.classList.add('aio-flip');
     setTimeout(redWave, 900);
   }
   var obs = new IntersectionObserver(function(entries) {
     if (entries[0].isIntersecting) play();
-    else { h1.classList.remove('aio-flip'); clearInterval(waveTimer); chars.forEach(function(c) { c.classList.remove('red'); }); }
+    else { h1.classList.remove('aio-flip'); clearTimeout(waveTimer); speed = 1000; words.forEach(function(w) { w.style.color = ''; }); }
   }, { threshold: 0.5 });
   obs.observe(h1);
 })();
