@@ -50,14 +50,14 @@
     '<div class="pay-code-val" id="payCode">' + code + '</div>' +
     '<div class="pay-code-hint">Энэ кодыг гүйлгээний утгад заавал бичнэ үү</div>' +
     '</div>' +
-    '<div class="pay-field"><label>Имэйл хаяг</label><input type="email" id="payEmail" placeholder="example@gmail.com"></div>' +
+    '<div class="pay-field"><label>Имэйл хаяг</label><input type="email" id="payEmail" placeholder="example@gmail.com"><div style="font-size:11px;color:#64748b;margin-top:4px">Энэ имэйл рүү програмын .exe файл илгээгдэнэ</div></div>' +
     '<div class="pay-field"><label>Утасны дугаар</label><input type="tel" id="payPhone" placeholder="99112233"></div>' +
     '<button class="pay-submit" id="paySubmit" onclick="submitPayment()">Шилжүүлсэн ✓</button>' +
     '</div></div>' +
     '<div class="pay-success" id="paySuccess">' +
     '<div class="pay-success-icon">✓</div>' +
     '<h3>Амжилттай бүртгэгдлээ!</h3>' +
-    '<p>Таны захиалгыг хүлээн авлаа.<br>24 цагийн дотор имэйл рүү лицензийн түлхүүр илгээгдэнэ.</p>' +
+    '<p>Таны захиалгыг хүлээн авлаа.<br>24 цагийн дотор таны имэйл рүү програмын <strong>.exe файл</strong> илгээгдэнэ.<br>Имэйлээ шалгана уу!</p>' +
     '</div></div></div>' +
     '<iframe name="payFrame" style="display:none"></iframe>';
 
