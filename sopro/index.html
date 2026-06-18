@@ -90,7 +90,7 @@ body{
   content:'';
   position:absolute;inset:0;
   border-radius:20px;
-  background:radial-gradient(ellipse at 50% 0%,var(--accent,.06),transparent 60%);
+  background:radial-gradient(ellipse at 50% -10%,var(--accent,.06),transparent 70%);
   opacity:0;
   transition:opacity .4s ease;
   pointer-events:none;
@@ -100,7 +100,7 @@ body{
   border-color:rgba(0,0,0,.12);
   box-shadow:0 12px 40px rgba(0,0,0,.08);
 }
-.card:hover::before{opacity:1}
+.card:hover::before{opacity:.75}
 
 /* Card sizes */
 .card-lg{grid-column:span 2;grid-row:span 1}
@@ -222,7 +222,7 @@ body{
 }
 .focus-shield{
   width:36px;height:42px;
-  border:2.5px solid #ef4444;
+  border:2.5px solid #f59e0b;
   border-radius:50% 50% 50% 50% / 30% 30% 70% 70%;
   opacity:.4;
   position:relative;
@@ -231,10 +231,10 @@ body{
 .focus-shield::after{
   content:'✕';position:absolute;inset:0;
   display:flex;align-items:center;justify-content:center;
-  font-size:16px;font-weight:900;color:#ef4444;
+  font-size:16px;font-weight:900;color:#f59e0b;
 }
 .card:hover .focus-shield{opacity:1;animation:shieldPulse 1.5s ease-in-out infinite}
-@keyframes shieldPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(239,68,68,.3)}50%{transform:scale(1.15);box-shadow:0 0 20px 8px rgba(239,68,68,.15)}}
+@keyframes shieldPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(245,158,11,.3)}50%{transform:scale(1.15);box-shadow:0 0 20px 8px rgba(245,158,11,.15)}}
 
 /* 8. Body / water drops */
 .body-preview{
@@ -491,7 +491,7 @@ body{
   </a>
 
   <!-- 7. Анхаарал дэмжигч -->
-  <a href="#" class="card card-md fade-up" style="--accent:#ef4444">
+  <a href="#" class="card card-md fade-up" style="--accent:#f59e0b">
     <div class="card-top">
       <h3>Анхаарал дэмжигч</h3>
       <p class="desc">Ажлын цагт Facebook, YouTube, тоглоом нээгдвэл дэлгэцийг бүрхэж хаахаас өөр аргагүй болгоно. Оройн 22:00-с хойш цэнхэр гэрэл, дууг бууруулж унтах бэлтгэлийг хангана. Мөн эцэг эхчүүд хүүхдийнхээ тоглоомын цагийг хязгаарлаж, хориотой вэбүүдийг блоклох боломжтой — систем өөрөө хүчээр хааж, дэлгэцийн донтолтоос хамгаална.</p>
