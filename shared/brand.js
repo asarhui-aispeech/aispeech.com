@@ -22,7 +22,7 @@
     var isHub = page === 'hub';
     var appName = el.getAttribute('data-sp-app') || '';
 
-    var brand = '<a href="/sopro" class="sp-brand">So<i>Pro</i>';
+    var brand = '<a href="/" class="sp-brand">So<i>Pro</i>';
     if (!isHub && appName) {
       brand += '<span class="sep"></span><em>' + appName + '</em>';
     }
@@ -33,7 +33,7 @@
       APPS.forEach(function(a){ nav += '<a href="' + a.href + '">' + a.label + '</a>'; });
     } else {
       var isMN = document.documentElement.lang === 'mn' && page !== 'aispeech-en';
-      nav += '<a href="/sopro">&larr; ' + (isMN ? 'Бүх хэрэгсэл' : 'All Tools') + '</a>';
+      nav += '<a href="/">&larr; ' + (isMN ? 'Бүх хэрэгсэл' : 'All Tools') + '</a>';
     }
     nav += '</nav>';
 

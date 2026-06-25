@@ -1,480 +1,697 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AISpeech + All-in-One Converter — Speech-to-Text & 20 Offline Tools</title>
-    <meta name="description" content="Smart Windows desktop app: speech-to-text + 20 offline PDF & image converter tools in one app. No cloud, no subscriptions.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/shared/brand.css">
-    <style>
-        :root { --accent: #e8453c; --safe: #16a34a; --dim: #4d4d4d; --bg: #ffffff; --card: #f7f7f7; --border: #e5e5e5; --text: #1a1a1a; --muted: #605f5f; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
-        a { color: var(--dim); text-decoration: none; }
-
-        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
-
-        /* Hero */
-        .hero { text-align: center; padding: 80px 24px 50px; }
-        .hero h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 3rem; color: var(--text); margin-bottom: 4px; letter-spacing: -1.5px; }
-        .aio-word > span { display: inline-block; clip-path: inset(0 0 100% 0); transition: color .3s ease; }
-        .aio-flip .aio-word > span { animation: revealDown 1.2s ease forwards; }
-        @keyframes revealDown {
-          0% { clip-path: inset(0 0 100% 0); }
-          100% { clip-path: inset(0 0 0 0); }
-        }
-        .aio-char { display: inline-block; transition: color .25s ease; }
-        .aio-char.red { color: var(--accent); }
-        .hero .subtitle { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 28px; }
-        .hero .desc { font-size: 16px; color: var(--muted); max-width: 560px; margin: 0 auto 36px; }
-        .hero .privacy { display: inline-flex; align-items: center; gap: 8px; background: rgba(22,163,74,0.05); border: 1px solid rgba(22,163,74,0.2); border-radius: 10px; padding: 14px 24px; font-size: 13px; color: var(--safe); font-weight: 600; margin-bottom: 36px; }
-
-        .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
-        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 36px; border-radius: 10px; font-size: 15px; font-weight: 600; border: none; cursor: pointer; letter-spacing: 0.5px; transition: all .2s; text-decoration: none; }
-        .btn-primary { background: var(--accent); color: var(--bg); }
-        .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
-        .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-        .btn-outline:hover { border-color: var(--dim); background: rgba(0,0,0,0.02); }
-        .price-note { font-size: 12px; color: var(--muted); }
-
-        /* Features */
-        .section { padding: 50px 0; }
-        .section h2 { font-size: 20px; color: var(--text); margin-bottom: 24px; text-align: center; letter-spacing: 1px; text-transform: uppercase; }
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
-        .feature { background: var(--card); border: .5px solid var(--border); border-radius: 14px; padding: 28px; transition: border-color .2s; }
-        .feature:hover { border-color: var(--safe); }
-        .feature .icon { font-size: 24px; margin-bottom: 12px; }
-        .feature h3 { font-size: 16px; color: var(--text); margin-bottom: 8px; }
-        .feature p { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
-
-        /* Tools grid */
-        .tools-section { text-align: center; padding: 40px 0; }
-        .cat-label { font-size: 12px; color: var(--dim); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin: 24px 0 12px; }
-        .tools-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-        .tool-chip { background: var(--card); border: .5px solid var(--border); border-radius: 8px; padding: 8px 14px; font-size: 11px; color: var(--text); transition: all .2s; }
-        .tool-chip:hover { border-color: var(--safe); color: var(--safe); }
-
-        /* How it works */
-        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; counter-reset: step; }
-        .step { background: var(--card); border: .5px solid var(--border); border-radius: 12px; padding: 24px; counter-increment: step; }
-        .step::before { content: counter(step); display: block; font-size: 28px; font-weight: 700; color: var(--safe); opacity: 0.4; margin-bottom: 8px; }
-        .step h3 { font-size: 13px; color: var(--text); margin-bottom: 6px; }
-        .step p { font-size: 12px; color: var(--muted); }
-
-        /* Specs */
-        .specs { text-align: center; padding: 40px 0 60px; }
-        .specs p { font-size: 13px; color: var(--muted); }
-
-        /* Try Tool Demo */
-        .demo { text-align: center; padding: 50px 0; border-top: .5px solid var(--border); }
-        .demo h2 { font-size: 20px; color: var(--text); margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
-        .demo .demo-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
-        .demo-box { max-width: 480px; margin: 0 auto; background: var(--card); border: 1.5px dashed var(--border); border-radius: 14px; padding: 36px 24px; transition: border-color .3s; cursor: pointer; position: relative; }
-        .demo-box:hover, .demo-box.drag-over { border-color: var(--safe); }
-        .demo-box .demo-icon { font-size: 36px; margin-bottom: 10px; }
-        .demo-box .demo-text { font-size: 13px; color: var(--muted); }
-        .demo-box .demo-text strong { color: var(--safe); }
-        .demo-thumbs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 16px; min-height: 20px; }
-        .demo-thumbs img { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
-        .demo-actions { margin-top: 18px; display: none; gap: 10px; justify-content: center; align-items: center; }
-        .demo-actions.show { display: flex; }
-        .demo-actions button { padding: 12px 32px; border-radius: 10px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; transition: all .2s; }
-        .demo-convert { background: var(--safe); color: var(--bg); }
-        .demo-convert:hover { filter: brightness(1.1); transform: translateY(-1px); }
-        .demo-clear { background: transparent; color: var(--muted); border: 1px solid var(--border) !important; }
-        .demo-count { font-size: 12px; color: var(--muted); }
-        .demo-result { margin-top: 16px; display: none; }
-        .demo-result.show { display: block; }
-        .demo-result a { display: inline-flex; align-items: center; gap: 6px; padding: 12px 28px; background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.3); border-radius: 10px; color: var(--safe); font-weight: 600; font-size: 14px; text-decoration: none; transition: all .2s; }
-        .demo-result a:hover { background: rgba(22,163,74,0.12); transform: translateY(-1px); }
-        .demo-cta { margin-top: 24px; font-size: 13px; color: var(--muted); }
-        .demo-cta strong { color: var(--text); }
-        .demo-tabs { display: flex; gap: 0; justify-content: center; margin-bottom: 20px; }
-        .demo-tab { padding: 10px 28px; font-size: 13px; font-weight: 600; border: 1px solid var(--border); background: var(--card); color: var(--muted); cursor: pointer; transition: all .2s; }
-        .demo-tab:first-child { border-radius: 8px 0 0 8px; }
-        .demo-tab:last-child { border-radius: 0 8px 8px 0; }
-        .demo-tab.active { background: var(--safe); color: var(--bg); border-color: var(--safe); }
-        .demo-panel { display: none; }
-        .demo-panel.active { display: block; }
-        .compress-info { margin-top: 16px; font-size: 12px; color: var(--muted); }
-        .compress-info strong { color: var(--text); }
-        .compress-slider { width: 100%; max-width: 300px; margin: 14px auto; display: block; accent-color: var(--safe); }
-        .compress-label { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
-        .specs strong { color: var(--text); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SoPro — Таны компьютерийг ухаалаг болгох 9 хэрэгсэл</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Alex+Brush&family=Great+Vibes&family=Allura&family=Monsieur+La+Doulaise&family=Sacramento&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared/brand.css">
+<link rel="stylesheet" href="/shared/pay.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#ffffff;
+  --bg2:#f8f9fa;
+  --card-bg:#ffffff;
+  --card-border:rgba(0,0,0,0.08);
+  --text:#1a1a2e;
+  --text-dim:#666;
+  --text-bright:#1a1a2e;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2rem; }
-            .hero .subtitle { font-size: 11px; letter-spacing: 2px; }
-            .features { grid-template-columns: 1fr; }
-        }
-    </style>
+/* ---- Hero ---- */
+.hero{
+  position:relative;z-index:1;
+  text-align:center;
+  padding:160px 24px 80px;
+}
+.hero h1{
+  font-size:clamp(48px,8vw,88px);
+  font-weight:800;
+  letter-spacing:-2px;
+  line-height:1;
+  color:var(--text-bright);
+  margin-bottom:20px;
+}
+.hero h1 span{
+  color:#e8453c;
+}
+.hero p{
+  font-size:clamp(16px,2.5vw,20px);
+  color:var(--text-dim);
+  max-width:500px;
+  margin:0 auto;
+  line-height:1.6;
+}
+
+/* ---- Bento Grid ---- */
+.bento{
+  position:relative;z-index:1;
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 24px 60px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-auto-rows:minmax(260px,auto);
+  gap:16px;
+}
+
+/* ---- Card ---- */
+.card{
+  position:relative;
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius:20px;
+  padding:32px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  overflow:hidden;
+  cursor:pointer;
+  text-decoration:none;
+  color:inherit;
+  transition:transform .35s cubic-bezier(.22,1,.36,1),
+             border-color .35s ease,
+             box-shadow .35s ease;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);
+}
+.card::before{
+  content:'';
+  position:absolute;inset:0;
+  border-radius:20px;
+  background:radial-gradient(ellipse 120% 45% at 50% 0%,var(--accent,.06),transparent 100%);
+  opacity:0;
+  transition:opacity .4s ease;
+  pointer-events:none;
+}
+.card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(0,0,0,.12);
+  box-shadow:0 12px 40px rgba(0,0,0,.08);
+}
+.card:hover::before{opacity:.75}
+
+/* Card sizes */
+.card-lg{grid-column:span 2;grid-row:span 1}
+.card-md{grid-column:span 1;grid-row:span 1}
+.card-tall{grid-column:span 1;grid-row:span 2}
+
+/* Card content */
+.card-top{flex:1;display:flex;flex-direction:column;gap:12px}
+.card h3{font-size:20px;font-weight:800;color:var(--text-bright);letter-spacing:-.3px}
+.card .desc{font-size:14px;color:var(--text-dim);line-height:1.5}
+.hotkey{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11px;font-weight:600;
+  color:#888;
+  background:#f0f1f3;
+  border:1px solid rgba(0,0,0,.08);
+  padding:4px 10px;
+  border-radius:6px;
+  width:fit-content;
+  font-family:'Inter',monospace;
+}
+.price{
+  font-size:13px;font-weight:600;
+  color:var(--text-dim);
+  margin-top:auto;
+  padding-top:16px;
+}
+.price strong{color:var(--text-bright);font-size:16px}
+
+/* ---- Mini Previews ---- */
+.preview{
+  height:80px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:3px;
+  margin:12px 0;
+  opacity:.5;
+  transition:opacity .4s ease;
+}
+.card:hover .preview{opacity:1}
+
+/* 1. Equalizer */
+.eq-bar{
+  width:4px;border-radius:2px;
+  background:#16a34a;
+  transition:height .15s ease;
+}
+
+/* 2. Blur scramble */
+.blur-preview{
+  font-family:monospace;font-size:14px;color:#0891b2;
+  letter-spacing:2px;
+  display:flex;align-items:center;justify-content:center;
+  height:80px;
+  filter:blur(0px);
+  transition:filter .3s;
+}
+.card:hover .blur-preview{animation:scrambleGlow 1.5s ease-in-out infinite}
+@keyframes scrambleGlow{0%,100%{filter:blur(0px);opacity:1}50%{filter:blur(3px);opacity:.6}}
+
+/* 3. Signature */
+.sig-preview{
+  height:80px;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.sig-text{
+  color:#c9a84c;
+  font-size:36px;
+  white-space:nowrap;
+  min-height:50px;
+  display:flex;align-items:center;
+}
+.sig-cursor{
+  display:inline-block;
+  width:2px;height:32px;
+  background:#c9a84c;
+  margin-left:2px;
+  animation:sigBlink .6s step-end infinite;
+}
+@keyframes sigBlink{50%{opacity:0}}
+
+/* 4. Macro typing */
+.macro-preview{
+  font-family:monospace;font-size:14px;color:#16a34a;
+  height:80px;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.macro-cursor{animation:blink .8s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* 5. Color spectrum */
+.color-preview{
+  height:80px;border-radius:10px;
+  background:linear-gradient(90deg,#ff0040,#ff8c00,#ffdd00,#00ff41,#00f0ff,#8b5cf6,#ff0040);
+  background-size:200% 100%;
+  opacity:.4;
+  transition:opacity .4s;
+}
+.card:hover .color-preview{opacity:.8;animation:spectrumShift 3s linear infinite}
+@keyframes spectrumShift{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+
+/* 6. Breathing circle */
+.breath-preview{
+  height:80px;display:flex;align-items:center;justify-content:center;
+}
+.breath-circle{
+  width:40px;height:40px;border-radius:50%;
+  border:2px solid #4fd1c5;
+  opacity:.4;
+  transition:opacity .4s;
+}
+.card:hover .breath-circle{opacity:.8;animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.5);opacity:1}}
+
+/* 7. Focus shield */
+.focus-preview{
+  height:80px;display:flex;align-items:center;justify-content:center;
+}
+.focus-shield{
+  width:36px;height:42px;
+  border:2.5px solid #f59e0b;
+  border-radius:50% 50% 50% 50% / 30% 30% 70% 70%;
+  opacity:.4;
+  position:relative;
+  transition:opacity .4s;
+}
+.focus-shield::after{
+  content:'✕';position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:900;color:#f59e0b;
+}
+.card:hover .focus-shield{opacity:1;animation:shieldPulse 1.5s ease-in-out infinite}
+@keyframes shieldPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(245,158,11,.3)}50%{transform:scale(1.15);box-shadow:0 0 20px 8px rgba(245,158,11,.15)}}
+
+/* 8. Body / water drops */
+.body-preview{
+  height:80px;display:flex;align-items:flex-end;justify-content:center;gap:12px;
+}
+.water-drop{
+  width:14px;height:20px;
+  background:#3b82f6;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity:.3;
+  animation:dropFall 2.5s ease-in-out infinite;
+}
+.wd2{animation-delay:.6s;height:16px}
+.wd3{animation-delay:1.2s;height:22px}
+.card:hover .water-drop{opacity:.8}
+@keyframes dropFall{0%{transform:translateY(-20px);opacity:0}30%{opacity:.6}60%{transform:translateY(0);opacity:.8}80%{transform:translateY(4px) scaleY(.7) scaleX(1.3);opacity:.4}100%{transform:translateY(-20px);opacity:0}}
+
+/* 9. Productivity bars */
+.prod-preview{
+  height:80px;display:flex;align-items:flex-end;justify-content:center;gap:6px;
+}
+.prod-bar{
+  width:10px;border-radius:3px;
+  background:#f59e0b;
+  transition:height .3s ease;
+  opacity:.4;
+}
+.card:hover .prod-bar{opacity:.9}
+
+/* ---- Bundle Section ---- */
+.bundle{position:relative;z-index:1;max-width:1100px;margin:40px auto 80px;padding:0 24px}
+.bundle-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:24px;padding:48px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.bundle-card h2{font-size:clamp(28px,4vw,40px);font-weight:800;color:var(--text-bright);margin-bottom:8px;letter-spacing:-1px;text-align:center}
+.bundle-card .subtitle{color:var(--text-dim);font-size:16px;margin-bottom:32px;text-align:center}
+.bundle-apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:32px}
+.bundle-app{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;border:1.5px solid rgba(0,0,0,.08);background:#fff;cursor:pointer;transition:all .2s;user-select:none}
+.bundle-app:hover{border-color:rgba(22,163,74,.3);background:rgba(22,163,74,.04)}
+.bundle-app.checked{border-color:rgba(22,163,74,.5);background:rgba(22,163,74,.06)}
+.bundle-app input[type=checkbox]{display:none}
+.bundle-check{width:22px;height:22px;border-radius:6px;border:2px solid rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:13px;color:transparent}
+.bundle-app.checked .bundle-check{background:#16a34a;border-color:#16a34a;color:#fff}
+.bundle-app-icon{font-size:20px;flex-shrink:0}
+.bundle-app-info{flex:1;min-width:0}
+.bundle-app-name{font-size:14px;font-weight:600;color:var(--text-bright)}
+.bundle-app-price{font-size:12px;color:var(--text-dim)}
+.bundle-summary{text-align:center;padding:24px 0;border-top:1px solid rgba(0,0,0,.06);margin-top:8px}
+.bundle-count{font-size:14px;color:var(--text-dim);margin-bottom:12px}
+.bundle-pricing{display:flex;align-items:baseline;justify-content:center;gap:16px;flex-wrap:wrap}
+.bundle-old{font-size:24px;color:var(--text-dim);text-decoration:line-through;text-decoration-color:rgba(0,0,0,.25)}
+.bundle-new{font-size:clamp(36px,5vw,56px);font-weight:800;background:linear-gradient(135deg,#16a34a,#00f0ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bundle-save{background:rgba(22,163,74,.15);color:#16a34a;font-size:13px;font-weight:700;padding:6px 14px;border-radius:100px}
+.bundle-hint{font-size:13px;color:var(--text-dim);margin-top:12px;opacity:.7}
+.bundle-select-all{display:inline-block;margin-bottom:20px;padding:8px 20px;background:rgba(22,163,74,.06);color:#16a34a;border:1px solid rgba(22,163,74,.2);border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:all .2s;text-align:center}
+.bundle-select-all:hover{background:rgba(22,163,74,.12)}
+.bundle-cta{display:inline-block;margin-top:24px;padding:14px 36px;background:#16a34a;color:#fff;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.bundle-cta:hover{background:#15803d;transform:translateY(-2px)}
+.bundle-cta:disabled{opacity:.4;cursor:not-allowed;transform:none}
+/* ---- Enterprise CTA ---- */
+.enterprise{
+  position:relative;z-index:1;
+  max-width:1100px;
+  margin:0 auto 60px;
+  padding:0 24px;
+}
+.ent-card{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:24px;
+  padding:48px;
+  text-align:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.ent-card h2{
+  font-size:clamp(20px,3vw,28px);
+  font-weight:800;
+  color:var(--text-bright);
+  margin-bottom:8px;
+  letter-spacing:-.5px;
+}
+.ent-sub{color:var(--text-dim);font-size:15px;margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto}
+.ent-fields{display:flex;gap:12px;margin-bottom:12px}
+.ent-form input,.ent-form textarea{
+  flex:1;
+  background:#f8f9fa;
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:10px;
+  padding:12px 16px;
+  color:var(--text-bright);
+  font-size:14px;
+  font-family:inherit;
+  outline:none;
+  transition:border-color .2s;
+}
+.ent-form input:focus,.ent-form textarea:focus{border-color:rgba(59,130,246,.5)}
+.ent-form textarea{width:100%;resize:vertical;margin-bottom:16px}
+.ent-btn{
+  display:inline-block;
+  padding:12px 32px;
+  background:#3b82f6;
+  color:#fff;
+  font-size:15px;font-weight:700;
+  border:none;border-radius:10px;
+  cursor:pointer;
+  transition:background .2s,transform .2s;
+}
+.ent-btn:hover{background:#2563eb;transform:translateY(-2px)}
+.ent-btn:disabled{opacity:.5;cursor:not-allowed}
+.ent-success{
+  display:none;
+  color:#16a34a;
+  font-size:14px;font-weight:600;
+  margin-top:16px;
+}
+@media(max-width:768px){
+  .ent-fields{flex-direction:column}
+  .ent-card{padding:28px 16px}
+}
+
+/* ---- Fade-up animation ---- */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ---- Responsive ---- */
+@media(max-width:768px){
+  .bento{grid-template-columns:1fr;gap:12px}
+  .card-lg,.card-tall{grid-column:span 1;grid-row:span 1}
+  .hero{padding:120px 16px 48px}
+  .bundle-card{padding:32px 20px}
+}
+@media(min-width:769px) and (max-width:1024px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .card-lg{grid-column:span 2}
+  .card-tall{grid-column:span 1;grid-row:span 1}
+}
+</style>
 </head>
 <body>
 
-    <div data-sp-header="aispeech-en" data-sp-app="AISpeech"></div>
 
-    <!-- Hero -->
-    <div class="hero">
-        <h1>AISpeech + <span class="aio-word"><span style="animation-delay:0s"><span class="aio-char">A</span><span class="aio-char">l</span><span class="aio-char">l</span><span class="aio-char">-</span></span></span><span class="aio-word"><span style="animation-delay:0.2s"><span class="aio-char">i</span><span class="aio-char">n</span><span class="aio-char">-</span></span></span><span class="aio-word"><span style="animation-delay:0.4s"><span class="aio-char">O</span><span class="aio-char">n</span><span class="aio-char">e</span></span></span> Converter</h1>
-        <div class="subtitle">Speech-to-Text & 20 Offline PDF/Image Tools</div>
-        <p class="desc">One Windows app — dictate to any cursor with F6, plus convert, compress, merge, split, and protect your PDF & image files. No cloud. No subscription.</p>
+<div data-sp-header="hub"></div>
 
-        <div class="privacy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Your files and voice never leave your computer</div>
+<!-- Hero -->
+<section class="hero">
+  <h1>So<span>Pro</span></h1>
+  <p style="font-size:22px;font-weight:700;margin-bottom:8px">ӨӨРИЙН ДАТАГАА ХЯНА.</p>
+  <p style="font-size:15px;opacity:0.5">AI-д бүх мэдээллээ өгчихөөд тайван сууж байгаа юм биш биз дээ? Таны мэдээллийг компьютерт чинь үлдээх 9 хэрэгслийг бүтээлээ.</p>
+</section>
 
-        <div class="cta-row">
-            <a href="https://buy.paddle.com/v3/checkout/buy?price=pri_01kv15xdrz1e69pjy2vm3rqp18&discount=dsc_01kv16fbnk53qmqb439kd23fg8" class="btn btn-primary" id="buy-btn" target="_blank">Buy Now — <s style="opacity:0.5">$15</s> $5</a>
-            <a href="#how" class="btn btn-outline">How It Works</a>
-        </div>
-        <div class="price-note">Launch offer: first 100 customers get 66% off! One-time payment. No subscription. Lifetime license.</div>
+<!-- Bento Grid -->
+<section class="bento">
+
+  <!-- 1. AISpeech — large card -->
+  <a href="/aispeech" class="card card-lg fade-up" style="--accent:#16a34a">
+    <div class="card-top">
+      <h3>AISpeech + All-in-One Converter</h3>
+      <p class="desc">Таны ярьсан үгийг шууд текст болгож, курсор байгаа газарт бичнэ. Монгол, Англи зэрэг 35 хэлийг дэмжинэ. Мөн зураг, аудио, видео файлыг хооронд нь хөрвүүлдэг All-in-One converter дагалдана.</p>
+      <span class="hotkey">F6</span>
+      <div class="preview" id="eq-preview"></div>
     </div>
+    <div class="price"><strong>9,000₮</strong></div>
+  </a>
 
-    <div class="container">
-
-        <!-- Features -->
-        <div class="section" id="features">
-            <h2>Why AISpeech + Converter</h2>
-            <p style="text-align:center; font-size:13px; color:var(--muted); max-width:600px; margin:0 auto 28px;">Five reasons professionals choose AISpeech over cloud-based alternatives.</p>
-            <div class="features">
-                <div class="feature">
-                    <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--safe)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-                    <h3>Data Privacy & Security</h3>
-                    <p>Government agencies, banks, law firms, and hospitals are prohibited from sending internal data to external servers. AISpeech processes everything on your machine — in memory only, then discarded. Zero leak risk.</p>
-                </div>
-                <div class="feature">
-                    <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--safe)" stroke-width="1.5" stroke-linecap="round"><path d="M2 12h20M12 2a15.3 15.3 0 010 20 15.3 15.3 0 010-20"/><circle cx="12" cy="12" r="10"/></svg></div>
-                    <h3>Works Without Internet</h3>
-                    <p>Cloud apps freeze when your connection drops. AISpeech runs entirely offline — even license validation reads from a local file. 100% uptime, anywhere in the world.</p>
-                </div>
-                <div class="feature">
-                    <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--safe)" stroke-width="1.5" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-                    <h3>Ultra-Low Latency</h3>
-                    <p>No network round-trip. No waiting for a server response. AISpeech polls input 20 times per second (~50ms) and pastes text at your cursor instantly via Ctrl+V. It feels like you're typing at full speed — true real-time dictation.</p>
-                </div>
-                <div class="feature">
-                    <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--safe)" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-                    <h3>One-Time Purchase, Lifetime License</h3>
-                    <p>AISpeech uses your own CPU and RAM — zero server costs on our end. That means one purchase, lifetime ownership. No recurring fees, no surprise charges, no price hikes.</p>
-                </div>
-                <div class="feature">
-                    <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--safe)" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-                    <h3>Deep OS Integration</h3>
-                    <p>Web-based apps can't access system hotkeys or clipboard. AISpeech uses native Windows PowerShell and C# to integrate deeply with your OS — press F6 in any app (ERP, accounting, games, chat) and dictate. The lime equaliser floats on top, invisible until you need it.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tools -->
-        <div class="tools-section" id="tools">
-            <h2>All-In-One Converter</h2>
-            <div class="cat-label">PDF Tools — 10</div>
-            <div class="tools-grid">
-                <div class="tool-chip">Merge PDF</div>
-                <div class="tool-chip">Split PDF</div>
-                <div class="tool-chip">Compress PDF</div>
-                <div class="tool-chip">Rotate PDF</div>
-                <div class="tool-chip">Protect PDF</div>
-                <div class="tool-chip">Page Numbers</div>
-                <div class="tool-chip">Extract Pages</div>
-                <div class="tool-chip">Delete Pages</div>
-                <div class="tool-chip">Images → PDF</div>
-                <div class="tool-chip">PDF → Images</div>
-            </div>
-            <div class="cat-label">Image Tools — 10</div>
-            <div class="tools-grid">
-                <div class="tool-chip">JPG → PNG</div>
-                <div class="tool-chip">PNG → JPG</div>
-                <div class="tool-chip">To WebP</div>
-                <div class="tool-chip">Resize</div>
-                <div class="tool-chip">Rotate 90°</div>
-                <div class="tool-chip">Mirror</div>
-                <div class="tool-chip">Crop</div>
-                <div class="tool-chip">Grayscale</div>
-                <div class="tool-chip">Brightness</div>
-                <div class="tool-chip">Watermark</div>
-            </div>
-        </div>
-
-        <!-- Try Free Tool -->
-        <div class="demo" id="demo">
-            <h2 id="demoTitle">Try It Free</h2>
-            <p class="demo-sub" id="demoSub">No upload, no server — runs entirely in your browser.</p>
-            <div class="demo-tabs">
-                <button class="demo-tab active" onclick="switchDemo('pdf')">Images → PDF</button>
-                <button class="demo-tab" onclick="switchDemo('compress')">Compress Image</button>
-            </div>
-
-            <!-- Panel 1: Images → PDF -->
-            <div class="demo-panel active" id="panelPdf">
-                <div class="demo-box" id="dropZone">
-                    <div class="demo-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-                    <p class="demo-text" id="dropText">Drag & drop images here or <strong>click to browse</strong></p>
-                    <input type="file" id="fileInput" accept="image/*" multiple style="display:none"/>
-                    <div class="demo-thumbs" id="thumbs"></div>
-                </div>
-                <div class="demo-actions" id="demoActions">
-                    <button class="demo-convert" id="convertBtn">Convert to PDF</button>
-                    <button class="demo-clear" id="clearBtn">Clear</button>
-                    <span class="demo-count" id="imgCount"></span>
-                </div>
-                <div class="demo-result" id="demoResult">
-                    <a id="downloadLink" href="#" download="images.pdf">⬇ Download PDF</a>
-                </div>
-            </div>
-
-            <!-- Panel 2: Compress Image -->
-            <div class="demo-panel" id="panelCompress">
-                <div class="demo-box" id="compDropZone">
-                    <div class="demo-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
-                    <p class="demo-text" id="compDropText">Drag & drop an image here or <strong>click to browse</strong></p>
-                    <input type="file" id="compFileInput" accept="image/*" style="display:none"/>
-                    <div class="demo-thumbs" id="compThumbs"></div>
-                </div>
-                <div class="compress-label" id="qualityLabel">Quality: <strong>60%</strong></div>
-                <input type="range" class="compress-slider" id="qualitySlider" min="10" max="100" value="60"/>
-                <div class="demo-actions" id="compActions">
-                    <button class="demo-convert" id="compressBtn">Compress</button>
-                    <button class="demo-clear" id="compClearBtn">Clear</button>
-                </div>
-                <div class="compress-info" id="compInfo"></div>
-                <div class="demo-result" id="compResult">
-                    <a id="compDownloadLink" href="#" download="compressed.jpg">⬇ Download Compressed</a>
-                </div>
-            </div>
-
-            <p class="demo-cta" id="demoCta">This is <strong>2 of 21 tools</strong> included in AISpeech. Get all for just $5.</p>
-        </div>
-
-        <!-- How it works -->
-        <div class="section" id="how">
-            <h2>How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <h3>Install</h3>
-                    <p>Download, run the installer. No admin required. Takes 30 seconds.</p>
-                </div>
-                <div class="step">
-                    <h3>Open any app</h3>
-                    <p>Word, Notepad, Chrome, Slack — place your cursor where you want text.</p>
-                </div>
-                <div class="step">
-                    <h3>Press F6 & speak</h3>
-                    <p>The equaliser lights up. Your words appear at the cursor in real-time.</p>
-                </div>
-                <div class="step">
-                    <h3>Convert files</h3>
-                    <p>Use the built-in converter for PDF and image tasks. Drag, drop, done.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- System Requirements -->
-        <div class="specs">
-            <h2>System Requirements</h2>
-            <p><strong>Windows 10/11</strong> (64-bit) · <strong>Google Chrome</strong> installed · Active microphone</p>
-        </div>
-
+  <!-- 2. Нууцлагч -->
+  <a href="/blur" class="card card-md fade-up" style="--accent:#00f0ff">
+    <div class="card-top">
+      <h3>Нууцлагч</h3>
+      <p class="desc">Screenshot дээрх регистрийн дугаар, утасны дугаар, нэр зэрэг хувийн мэдээллийг автоматаар илрүүлж далдална. Зургаа илгээхээс өмнө нэг товшилтоор нууцална. Төрийн байгууллага, банк, ААН-үүдэд нууц мэдээллийг гараар бүдгэрүүлэх шаардлагагүй болно.</p>
+      <span class="hotkey">Alt + B</span>
+      <div class="blur-preview" id="blur-text">█▓░ НА█░▓</div>
     </div>
+    <div class="price"><strong>9,000₮</strong></div>
+  </a>
 
-    <footer data-sp-footer></footer>
-
-<script src="/shared/brand.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script>
-// ── Tab switching ──
-function switchDemo(tab) {
-  document.querySelectorAll('.demo-tab').forEach((b,i) => b.classList.toggle('active', (tab==='pdf'?0:1)===i));
-  document.getElementById('panelPdf').classList.toggle('active', tab==='pdf');
-  document.getElementById('panelCompress').classList.toggle('active', tab==='compress');
-}
-
-// ── Image Compress Demo ──
-(function(){
-  const drop = document.getElementById('compDropZone');
-  const input = document.getElementById('compFileInput');
-  const thumbs = document.getElementById('compThumbs');
-  const actions = document.getElementById('compActions');
-  const compressBtn = document.getElementById('compressBtn');
-  const clearBtn = document.getElementById('compClearBtn');
-  const slider = document.getElementById('qualitySlider');
-  const qualityLabel = document.getElementById('qualityLabel');
-  const info = document.getElementById('compInfo');
-  const result = document.getElementById('compResult');
-  const dlLink = document.getElementById('compDownloadLink');
-  let file = null;
-
-  drop.addEventListener('click', () => input.click());
-  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag-over'); });
-  drop.addEventListener('dragleave', () => drop.classList.remove('drag-over'));
-  drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('drag-over'); setFile(e.dataTransfer.files[0]); });
-  input.addEventListener('change', () => { setFile(input.files[0]); input.value = ''; });
-  slider.addEventListener('input', () => { qualityLabel.innerHTML = 'Quality: <strong>' + slider.value + '%</strong>'; });
-
-  function setFile(f) {
-    if (!f || !f.type.startsWith('image/')) return;
-    file = f;
-    thumbs.innerHTML = '';
-    const img = document.createElement('img'); img.src = URL.createObjectURL(f); thumbs.appendChild(img);
-    actions.classList.add('show');
-    result.classList.remove('show');
-    info.innerHTML = 'Original: <strong>' + (f.size/1024).toFixed(0) + ' KB</strong>';
-  }
-  clearBtn.addEventListener('click', () => { file=null; thumbs.innerHTML=''; actions.classList.remove('show'); result.classList.remove('show'); info.innerHTML=''; });
-
-  compressBtn.addEventListener('click', () => {
-    if (!file) return;
-    compressBtn.disabled = true; compressBtn.textContent = 'Compressing...';
-    const img = new Image();
-    img.onload = () => {
-      const c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
-      c.getContext('2d').drawImage(img, 0, 0);
-      const q = slider.value / 100;
-      c.toBlob(blob => {
-        const out = blob.size < file.size ? blob : file;
-        const saved = ((1 - out.size / file.size) * 100).toFixed(0);
-        info.innerHTML = 'Original: <strong>' + (file.size/1024).toFixed(0) + ' KB</strong> → Compressed: <strong>' + (out.size/1024).toFixed(0) + ' KB</strong> (saved ' + saved + '%)';
-        dlLink.href = URL.createObjectURL(out);
-        result.classList.add('show');
-        compressBtn.disabled = false; compressBtn.textContent = 'Compress';
-      }, 'image/jpeg', q);
-    };
-    img.src = URL.createObjectURL(file);
-  });
-})();
-
-// ── Image → PDF Demo ──
-(function(){
-  const drop = document.getElementById('dropZone');
-  const input = document.getElementById('fileInput');
-  const thumbs = document.getElementById('thumbs');
-  const actions = document.getElementById('demoActions');
-  const convertBtn = document.getElementById('convertBtn');
-  const clearBtn = document.getElementById('clearBtn');
-  const countEl = document.getElementById('imgCount');
-  const result = document.getElementById('demoResult');
-  const dlLink = document.getElementById('downloadLink');
-  let files = [];
-
-  drop.addEventListener('click', () => input.click());
-  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag-over'); });
-  drop.addEventListener('dragleave', () => drop.classList.remove('drag-over'));
-  drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
-  input.addEventListener('change', () => { addFiles(input.files); input.value = ''; });
-
-  function addFiles(fl) {
-    for (const f of fl) { if (f.type.startsWith('image/')) files.push(f); }
-    updateUI();
-  }
-  function updateUI() {
-    thumbs.innerHTML = '';
-    files.forEach(f => { const img = document.createElement('img'); img.src = URL.createObjectURL(f); thumbs.appendChild(img); });
-    countEl.textContent = files.length + ' image' + (files.length !== 1 ? 's' : '');
-    actions.classList.toggle('show', files.length > 0);
-    result.classList.remove('show');
-  }
-  clearBtn.addEventListener('click', () => { files = []; updateUI(); });
-
-  convertBtn.addEventListener('click', async () => {
-    if (!files.length) return;
-    convertBtn.disabled = true;
-    convertBtn.textContent = 'Converting...';
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    for (let i = 0; i < files.length; i++) {
-      const url = URL.createObjectURL(files[i]);
-      const img = new Image();
-      await new Promise(r => { img.onload = r; img.src = url; });
-      const pw = doc.internal.pageSize.getWidth();
-      const ph = doc.internal.pageSize.getHeight();
-      const ratio = Math.min(pw / img.width, ph / img.height) * 0.9;
-      const w = img.width * ratio;
-      const h = img.height * ratio;
-      if (i > 0) doc.addPage();
-      doc.addImage(img, 'JPEG', (pw - w) / 2, (ph - h) / 2, w, h);
-      URL.revokeObjectURL(url);
-    }
-    const blob = doc.output('blob');
-    dlLink.href = URL.createObjectURL(blob);
-    result.classList.add('show');
-    convertBtn.disabled = false;
-    convertBtn.textContent = 'Convert to PDF';
-  });
-})();
-</script>
-<script>
-(function(){
-  var h1 = document.querySelector('.hero h1');
-  if (!h1) return;
-  var words = h1.querySelectorAll('.aio-word');
-  var timer;
-  var running = false;
-  function greenWave(cb) {
-    var i = 0;
-    function step() {
-      if (!running) return;
-      if (i > 0) words[i - 1].style.color = '';
-      if (i < words.length) {
-        words[i].style.color = 'var(--safe)';
-        i++;
-        timer = setTimeout(step, 1000);
-      } else {
-        words[words.length - 1].style.color = '';
-        timer = setTimeout(cb, 800);
-      }
-    }
-    step();
-  }
-  function flip(cb) {
-    if (!running) return;
-    h1.classList.remove('aio-flip'); void h1.offsetWidth; h1.classList.add('aio-flip');
-    timer = setTimeout(cb, 900);
-  }
-  function cycle() {
-    if (!running) return;
-    flip(function() { greenWave(cycle); });
-  }
-  function play() {
-    running = true;
-    clearTimeout(timer);
-    words.forEach(function(w) { w.style.color = ''; });
-    cycle();
-  }
-  var obs = new IntersectionObserver(function(entries) {
-    if (entries[0].isIntersecting) play();
-    else { running = false; h1.classList.remove('aio-flip'); clearTimeout(timer); words.forEach(function(w) { w.style.color = ''; }); }
-  }, { threshold: 0.5 });
-  obs.observe(h1);
-})();
-</script>
-
-<!-- Enterprise Contact -->
-<section style="max-width:800px;margin:60px auto;padding:0 24px">
-  <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:40px;text-align:center;backdrop-filter:blur(12px)">
-    <h2 style="font-size:22px;font-weight:800;color:#fff;margin-bottom:6px">Custom development for your organization</h2>
-    <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:24px">We can customize these tools to fit your workflow and develop additional features.</p>
-    <form id="entForm" onsubmit="return submitEntForm(event)" style="max-width:500px;margin:0 auto">
-      <div style="display:flex;gap:10px;margin-bottom:10px">
-        <input type="tel" id="entPhone" placeholder="Phone number" required style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:11px 14px;color:#fff;font-size:14px;outline:none">
-        <input type="email" id="entEmail" placeholder="Company email" required style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:11px 14px;color:#fff;font-size:14px;outline:none">
+  <!-- 3. Гарын үсэг -->
+  <a href="/sign" class="card card-md fade-up" style="--accent:#c9a84c">
+    <div class="card-top">
+      <h3>Гарын үсэг</h3>
+      <p class="desc">PDF, Word баримт дээр өөрийн гарын үсэг болон тамгыг нэг товшилтоор зур. Гарын үсгээ нэг удаа бүртгээд, дахин дахин ашиглана — принтер, сканнер шаардлагагүй. Өдөрт маш олон файлд гарын үсэг зурдаг албан хэрэгцээнд зориулсан хэрэгсэл.</p>
+      <span class="hotkey">Ctrl + Shift + S</span>
+      <div class="sig-preview">
+        <div class="sig-text" id="sig-text"><span class="sig-cursor"></span></div>
       </div>
-      <textarea id="entMsg" placeholder="Briefly describe what features you need..." rows="3" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:11px 14px;color:#fff;font-size:14px;outline:none;resize:vertical;margin-bottom:14px;font-family:inherit;box-sizing:border-box"></textarea>
-      <button type="submit" id="entBtn" style="padding:11px 28px;background:#16a34a;color:#fff;font-size:14px;font-weight:700;border:none;border-radius:10px;cursor:pointer">Send request</button>
-      <p id="entSuccess" style="display:none;color:#16a34a;font-size:13px;font-weight:600;margin-top:12px">✓ Request sent successfully. We will contact you shortly.</p>
+    </div>
+    <div class="price"><strong>9,000₮</strong></div>
+  </a>
+
+  <!-- 4. Бэлдэц -->
+  <a href="/macro" class="card card-md fade-up" style="--accent:#00ff41">
+    <div class="card-top">
+      <h3>Текст бэлдэц</h3>
+      <p class="desc">Байнга бичдэг текстээ товчлол болгож хадгална. ";данс" гэж бичээд зай дарахад дансны бүрэн мэдээлэл автоматаар бичигдэнэ. Онлайн худалдаа, хэрэглэгчийн үйлчилгээний ажилтнууд давтан бичдэг урт текстээ секундэд бичнэ.</p>
+      <span class="hotkey">; trigger + space</span>
+      <div class="macro-preview" id="macro-text"><span class="macro-cursor">|</span></div>
+    </div>
+    <div class="price"><strong>9,000₮</strong></div>
+  </a>
+
+  <!-- 5. Өнгө авагч -->
+  <a href="/color" class="card card-md fade-up" style="--accent:#8b5cf6">
+    <div class="card-top">
+      <h3>Өнгө авагч</h3>
+      <p class="desc">Дэлгэцийн дурын цэг дээр хулганаа аваачихад өнгийн HEX, RGB, HSL кодыг шууд харуулна. Дизайнер, хөгжүүлэгчдэд зориулсан хурдан, нарийвчлалтай өнгө авагч.</p>
+      <span class="hotkey">Ctrl + Shift + P</span>
+      <div class="color-preview"></div>
+    </div>
+    <div class="price"><strong>9,000₮</strong></div>
+  </a>
+
+  <!-- 6. Нүд хамгаалагч -->
+  <a href="/eyecare" class="card card-md fade-up" style="--accent:#4fd1c5">
+    <div class="card-top">
+      <h3>Нүд хамгаалагч</h3>
+      <p class="desc">20 минут тутам нүдний амралт, амьсгалын дасгал харуулна. 4 секунд тутам нүд цавчих сануулга өгч, нүд хуурайшилтаас урьдчилан сэргийлнэ. Компьютерт олон цаг суудаг хүмүүсийн нүдний эрүүл мэндийг хамгаалах хамгийн энгийн арга.</p>
+      <span class="hotkey">Auto</span>
+      <div class="breath-preview">
+        <div class="breath-circle"></div>
+      </div>
+    </div>
+    <div class="price"><strong>9,000₮</strong></div>
+  </a>
+
+  <!-- 7. Анхаарал дэмжигч -->
+  <a href="#" class="card card-md fade-up" style="--accent:#f59e0b">
+    <div class="card-top">
+      <h3>Анхаарал дэмжигч</h3>
+      <p class="desc">Ажлын цагаар Facebook, YouTube, тоглоом нээгдвэл дэлгэц дээр сануулга гарч блоклоно. Оройн 22:00-с хойш цэнхэр гэрэл, дууг бууруулж унтах бэлтгэлийг хангана. Эцэг эхчүүд хүүхдийнхээ тоглоомын цагийг хязгаарлаж, хориотой вэбүүдийг блоклох боломжтой — систем өөрөө хүчээр хааж дэлгэцийн донтолтоос хамгаална.</p>
+      <span class="hotkey">Alt + F</span>
+      <div class="focus-preview" id="focus-preview">
+        <div class="focus-shield"></div>
+      </div>
+    </div>
+    <div class="price"><strong>9,000₮</strong></div>
+  </a>
+
+  <!-- 8. Эрүүл хэмнэл -->
+  <a href="#" class="card card-md fade-up" style="--accent:#3b82f6">
+    <div class="card-top">
+      <h3>Эрүүл хэмнэл</h3>
+      <p class="desc">50 минут суусны дараа босох, 2 цаг тутам ус уухыг сануулж, гар, булчингийн ачаалал хэтэрвэл keyboard болон mouse-ыг цоожилж амраана. Дуу хоолойгоор сунгалтын дасгал хийхийг зааварлана. Улайраад ажлаа хиймээр байсан ч биеийн ачааллыг кодоор хязгаарлаж, үе мөч болон нүдний эрүүл мэндийг урт хугацаанд хамгаална.</p>
+      <span class="hotkey">Auto</span>
+      <div class="body-preview" id="body-preview">
+        <div class="water-drop"></div>
+        <div class="water-drop wd2"></div>
+        <div class="water-drop wd3"></div>
+      </div>
+    </div>
+    <div class="price"><strong>9,000₮</strong></div>
+  </a>
+
+  <!-- 9. Бүтээмж хэмжигч -->
+  <a href="#" class="card card-lg fade-up" style="--accent:#f59e0b">
+    <div class="card-top">
+      <h3>Бүтээмж хэмжигч</h3>
+      <p class="desc">Помодоро таймер (25 мин), идэвхтэй програмын бүртгэл, өдрийн төгсгөлийн сэтгэл зүйн тэмдэглэл — бүгд нэг дор. "Бүтээмжийн харьцаа: 45%" гэсэн бодит датаг хараад маргааш нь сошиал медиа нээхдээ ухамсартайгаар өөрийгөө хянахгүй гээд яах билээ. Ажлаа сэтгэл зүйн хувьд "цэгцэлж хаах" зан үйлий бий болгож, стрессийг гэртээ авч орохоос сэргийлнэ.</p>
+      <span class="hotkey">Alt + P</span>
+      <div class="prod-preview" id="prod-preview"></div>
+    </div>
+    <div class="price"><strong>9,000₮</strong></div>
+  </a>
+
+</section>
+
+<!-- Bundle Builder -->
+<section class="bundle fade-up" id="bundle">
+  <div class="bundle-card">
+    <h2>Өөрийн багц үүсгэх</h2>
+    <p class="subtitle">Өөрт хэрэгтэй хэрэгслүүдээ сонгож багцын хямдралаар аваарай</p>
+    <div style="text-align:center"><span class="bundle-select-all" id="selectAll" onclick="toggleAll()">✓ Бүгдийг сонгох</span></div>
+    <div class="bundle-apps" id="bundleApps">
+      <label class="bundle-app" onclick="toggleApp(this)"><input type="checkbox" value="AISpeech"><span class="bundle-check">✓</span><span class="bundle-app-icon">🎤</span><div class="bundle-app-info"><div class="bundle-app-name">AISpeech</div><div class="bundle-app-price">9,000₮</div></div></label>
+      <label class="bundle-app" onclick="toggleApp(this)"><input type="checkbox" value="Blur"><span class="bundle-check">✓</span><span class="bundle-app-icon">🔒</span><div class="bundle-app-info"><div class="bundle-app-name">Нууцлагч</div><div class="bundle-app-price">9,000₮</div></div></label>
+      <label class="bundle-app" onclick="toggleApp(this)"><input type="checkbox" value="Sign"><span class="bundle-check">✓</span><span class="bundle-app-icon">✍️</span><div class="bundle-app-info"><div class="bundle-app-name">Гарын үсэг</div><div class="bundle-app-price">9,000₮</div></div></label>
+      <label class="bundle-app" onclick="toggleApp(this)"><input type="checkbox" value="Macro"><span class="bundle-check">✓</span><span class="bundle-app-icon">⌨️</span><div class="bundle-app-info"><div class="bundle-app-name">Текст бэлдэц</div><div class="bundle-app-price">9,000₮</div></div></label>
+      <label class="bundle-app" onclick="toggleApp(this)"><input type="checkbox" value="Color"><span class="bundle-check">✓</span><span class="bundle-app-icon">🎨</span><div class="bundle-app-info"><div class="bundle-app-name">Өнгө авагч</div><div class="bundle-app-price">9,000₮</div></div></label>
+      <label class="bundle-app" onclick="toggleApp(this)"><input type="checkbox" value="EyeCare"><span class="bundle-check">✓</span><span class="bundle-app-icon">👁️</span><div class="bundle-app-info"><div class="bundle-app-name">Нүд хамгаалагч</div><div class="bundle-app-price">9,000₮</div></div></label>
+      <label class="bundle-app" onclick="toggleApp(this)"><input type="checkbox" value="Focus"><span class="bundle-check">✓</span><span class="bundle-app-icon">🛡️</span><div class="bundle-app-info"><div class="bundle-app-name">Анхаарал дэмжигч</div><div class="bundle-app-price">9,000₮</div></div></label>
+      <label class="bundle-app" onclick="toggleApp(this)"><input type="checkbox" value="Body"><span class="bundle-check">✓</span><span class="bundle-app-icon">🧘</span><div class="bundle-app-info"><div class="bundle-app-name">Эрүүл хэмнэл</div><div class="bundle-app-price">9,000₮</div></div></label>
+      <label class="bundle-app" onclick="toggleApp(this)"><input type="checkbox" value="Productivity"><span class="bundle-check">✓</span><span class="bundle-app-icon">📊</span><div class="bundle-app-info"><div class="bundle-app-name">Бүтээмж хэмжигч</div><div class="bundle-app-price">9,000₮</div></div></label>
+    </div>
+    <div class="bundle-summary" id="bundleSummary" style="display:none">
+      <div class="bundle-count" id="bundleCount"></div>
+      <div class="bundle-pricing">
+        <span class="bundle-old" id="bundleOld"></span>
+        <span class="bundle-new" id="bundleNew"></span>
+        <span class="bundle-save" id="bundleSave"></span>
+      </div>
+      <div class="bundle-hint" id="bundleHint">Бүгдийг сонговол 50% хямдрал!</div>
+    </div>
+    <div style="text-align:center">
+      <button class="bundle-cta" id="bundleCta" disabled onclick="openBundlePay()">Багц авах</button>
+    </div>
+  </div>
+</section>
+
+<div data-sp-pay="bundle" data-sp-pay-title="SoPro багц" data-sp-pay-prefix="SPR" data-sp-pay-price="9000" data-sp-pay-account="5400780646"></div>
+
+<!-- Enterprise CTA -->
+<section class="enterprise fade-up">
+  <div class="ent-card">
+    <h2>Байгууллагын онцлогт нийцүүлэн хөгжүүлэлт хийлгэж авах боломжтой</h2>
+    <p class="ent-sub">Таны байгууллагын ажлын урсгалд тохируулан эдгээр хэрэгслүүдийг тусгайлан өөрчилж, нэмэлт функц хөгжүүлж өгнө.</p>
+    <form class="ent-form" id="entForm" onsubmit="return submitEntForm(event)">
+      <div class="ent-fields">
+        <input type="tel" id="entPhone" placeholder="Утасны дугаар" required>
+        <input type="email" id="entEmail" placeholder="Байгууллагын имэйл" required>
+      </div>
+      <textarea id="entMsg" placeholder="Ямар онцлог хэрэгтэй байгааг товч бичнэ үү..." rows="3"></textarea>
+      <button type="submit" class="ent-btn" id="entBtn">Хүсэлт илгээх</button>
+      <p class="ent-success" id="entSuccess">✓ Хүсэлт амжилттай илгээгдлээ. Бид тантай удахгүй холбогдоно.</p>
     </form>
   </div>
 </section>
 <iframe name="entFrame" style="display:none"></iframe>
+
+<footer data-sp-footer></footer>
+
+<script src="/shared/brand.js"></script>
+<script src="/shared/pay.js"></script>
 <script>
+// ---- Equalizer bars ----
+(function(){
+  const container = document.getElementById('eq-preview');
+  const count = 24;
+  for(let i = 0; i < count; i++){
+    const bar = document.createElement('div');
+    bar.className = 'eq-bar';
+    bar.style.height = '8px';
+    container.appendChild(bar);
+  }
+  const bars = container.querySelectorAll('.eq-bar');
+  function animateEq(){
+    const t = Date.now() / 1000;
+    bars.forEach((bar, i) => {
+      const wave = Math.sin(t * 3 + i * 0.6) * 0.3
+                 + Math.sin(t * 5.3 + i * 1.1) * 0.25
+                 + Math.cos(t * 2.1 + i * 0.4) * 0.15;
+      const h = 12 + Math.abs(wave) * 55;
+      bar.style.height = h + 'px';
+    });
+    requestAnimationFrame(animateEq);
+  }
+  animateEq();
+})();
+
+// ---- Blur scramble text ----
+(function(){
+  const el = document.getElementById('blur-text');
+  const chars = '█▓░▒■□▪▫●◌';
+  const base = 'НУУЦ МЭДЭЭЛЭЛ';
+  let frame = 0;
+  setInterval(() => {
+    frame++;
+    let out = '';
+    for(let i = 0; i < base.length; i++){
+      out += (Math.random() > 0.4) ? chars[Math.floor(Math.random()*chars.length)] : base[i];
+    }
+    el.textContent = out;
+  }, 120);
+})();
+
+// ---- Signature handwriting animation ----
+(function(){
+  const el = document.getElementById('sig-text');
+  const fonts = ['Alex Brush','Great Vibes','Allura','Monsieur La Doulaise','Sacramento'];
+  const word = 'SoPro';
+  let fi = 0;
+  function cycle(){
+    const font = fonts[fi % fonts.length];
+    fi++;
+    let idx = 0;
+    el.style.fontFamily = "'" + font + "', cursive";
+    el.innerHTML = '<span class="sig-cursor"></span>';
+    function typeLetter(){
+      if(idx < word.length){
+        el.innerHTML = word.slice(0, idx + 1) + '<span class="sig-cursor"></span>';
+        idx++;
+        setTimeout(typeLetter, 180 + Math.random() * 120);
+      } else {
+        setTimeout(function(){
+          // Fade out then restart with next font
+          el.style.transition = 'opacity .4s';
+          el.style.opacity = '0';
+          setTimeout(function(){
+            el.style.opacity = '1';
+            cycle();
+          }, 500);
+        }, 2000);
+      }
+    }
+    typeLetter();
+  }
+  cycle();
+})();
+
+// ---- Macro typing animation ----
+(function(){
+  const el = document.getElementById('macro-text');
+  const trigger = ';данс';
+  const expanded = 'Голомт банк 1234-5678-9012';
+  let phase = 0, idx = 0;
+  function tick(){
+    if(phase === 0){
+      // typing trigger
+      if(idx <= trigger.length){
+        el.innerHTML = '<span style="opacity:.6">' + trigger.slice(0,idx) + '</span><span class="macro-cursor">|</span>';
+        idx++;
+        setTimeout(tick, 150);
+      } else {
+        phase = 1; idx = 0;
+        setTimeout(tick, 400);
+      }
+    } else if(phase === 1){
+      // expanding
+      if(idx <= expanded.length){
+        el.innerHTML = expanded.slice(0,idx) + '<span class="macro-cursor">|</span>';
+        idx++;
+        setTimeout(tick, 30);
+      } else {
+        setTimeout(() => { phase = 0; idx = 0; tick(); }, 2500);
+      }
+    }
+  }
+  tick();
+})();
+
+// ---- Productivity bars animation ----
+(function(){
+  const container = document.getElementById('prod-preview');
+  const count = 12;
+  for(let i = 0; i < count; i++){
+    const bar = document.createElement('div');
+    bar.className = 'prod-bar';
+    bar.style.height = '6px';
+    container.appendChild(bar);
+  }
+  const bars = container.querySelectorAll('.prod-bar');
+  function animateProd(){
+    const t = Date.now() / 1000;
+    bars.forEach((bar, i) => {
+      const h = 10 + Math.abs(Math.sin(t * 0.8 + i * 0.5)) * 50
+              + Math.abs(Math.cos(t * 1.3 + i * 0.9)) * 15;
+      bar.style.height = h + 'px';
+    });
+    requestAnimationFrame(animateProd);
+  }
+  animateProd();
+})();
+
+// ---- Enterprise form submission ----
 function submitEntForm(e){
   e.preventDefault();
   var phone=document.getElementById('entPhone').value;
   var email=document.getElementById('entEmail').value;
   var msg=document.getElementById('entMsg').value;
   var btn=document.getElementById('entBtn');
-  btn.disabled=true;btn.textContent='Sending...';
+  btn.disabled=true;btn.textContent='Илгээж байна...';
   var form=document.createElement('form');
   form.method='POST';form.target='entFrame';
   form.action='https://docs.google.com/forms/d/e/1FAIpQLSepAqBKUGAJY4IYrHt7eJaH1wznpjiNwMlxp7uQG0k7BX5PIA/formResponse';
@@ -483,13 +700,85 @@ function submitEntForm(e){
   });
   document.body.appendChild(form);form.submit();document.body.removeChild(form);
   setTimeout(function(){
-    btn.textContent='Sent ✓';
+    btn.textContent='Илгээгдсэн ✓';
     document.getElementById('entSuccess').style.display='block';
     document.getElementById('entForm').reset();
   },1500);
   return false;
 }
-</script>
 
+// ---- Intersection Observer fade-up ----
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ---- Bundle Builder ----
+var PRICE=9000,TOTAL_APPS=9;
+function getChecked(){return document.querySelectorAll('#bundleApps input:checked')}
+function fmt(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')}
+function toggleApp(el){
+  var cb=el.querySelector('input');
+  cb.checked=!cb.checked;
+  el.classList.toggle('checked',cb.checked);
+  updateBundle();
+}
+function toggleAll(){
+  var apps=document.querySelectorAll('#bundleApps .bundle-app');
+  var all=getChecked().length===TOTAL_APPS;
+  apps.forEach(function(a){
+    var cb=a.querySelector('input');
+    cb.checked=!all;
+    a.classList.toggle('checked',!all);
+  });
+  updateBundle();
+}
+function updateBundle(){
+  var checked=getChecked();
+  var count=checked.length;
+  var sum=document.getElementById('bundleSummary');
+  var cta=document.getElementById('bundleCta');
+  var hint=document.getElementById('bundleHint');
+  var selAll=document.getElementById('selectAll');
+  selAll.textContent=count===TOTAL_APPS?'✕ Бүгдийг болих':'✓ Бүгдийг сонгох';
+  if(count<2){sum.style.display='none';cta.disabled=true;return;}
+  sum.style.display='block';cta.disabled=false;
+  var original=count*PRICE;
+  var discount=count===TOTAL_APPS?50:30;
+  var final_price=Math.round(original*(100-discount)/100);
+  document.getElementById('bundleCount').textContent=count+' хэрэгсэл сонгосон';
+  document.getElementById('bundleOld').textContent=fmt(original)+'₮';
+  document.getElementById('bundleNew').textContent=fmt(final_price)+'₮';
+  document.getElementById('bundleSave').textContent=discount+'% хэмнэлт';
+  hint.textContent=count===TOTAL_APPS?'Бүх багц — хамгийн их хэмнэлт!':'Бүгдийг сонговол 50% хямдрал!';
+}
+function openBundlePay(){
+  var checked=getChecked();
+  if(checked.length<2)return;
+  var count=checked.length;
+  var original=count*PRICE;
+  var discount=count===TOTAL_APPS?50:30;
+  var final_price=Math.round(original*(100-discount)/100);
+  var names=[];checked.forEach(function(cb){names.push(cb.value)});
+  var chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',code='SPR-';
+  for(var i=0;i<6;i++)code+=chars[Math.floor(Math.random()*chars.length)];
+  document.getElementById('payCode').textContent=code;
+  document.getElementById('payTitle').textContent=count===TOTAL_APPS?'SoPro бүрэн багц (9 апп)':'SoPro багц ('+count+' апп)';
+  document.getElementById('payAmount').innerHTML='<s>'+fmt(original)+'₮</s> '+fmt(final_price)+'₮';
+  document.getElementById('payList').textContent=names.join(' • ');
+  document.getElementById('payDun').textContent=fmt(final_price)+'₮';
+  document.getElementById('payForm').style.display='';
+  document.getElementById('paySuccess').style.display='none';
+  document.getElementById('paySubmit').disabled=false;
+  document.getElementById('paySubmit').textContent='Шилжүүлсэн ✓';
+  document.getElementById('payModal').style.display='flex';
+  window._spPayCode=code;window._spPayNames=names.join(', ');window._spPayPrice=final_price;
+}
+</script>
 </body>
 </html>
